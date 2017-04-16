@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
+import { Router, Scene } from 'react-native-router-flux';
 import { AppRegistry } from 'react-native';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import App from '../App'
 
 import store from '../../store/store';
+
+const RouterWithRedux = connect()(Router);
 
 export default class StartComponent extends Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <RouterWithRedux>
+            <Scene key="root">
+              <Scene key="app" component={App} title="Schedule" initial={true} />
+            </Scene>
+        </RouterWithRedux>
       </Provider>
     );
   }

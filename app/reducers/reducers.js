@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import ical from '../utils/ical'
+import routes from './routes'
 
 const bookingsReducer = (state={
   list: [],
@@ -25,6 +26,7 @@ const programsReducer = (state=[], action) => {
 }
 
 export default reducers = combineReducers({
+  routes: routes,
   bookings: bookingsReducer,
   programs: programsReducer
 })

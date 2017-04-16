@@ -18,7 +18,7 @@ import BookingComponent from './BookingComponent';
 export default class App extends Component {
   fetchBookings () {
     this.props.dispatch((dispatch) => {
-      fetch("https://kronox.mah.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sokMedAND=false&sprak=SV&resurser=p.THDTA14h%2C")
+      fetch("https://kronox.mah.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sokMedAND=false&sprak=SV&resurser=p.THDTA15h")
       .then((response) => {
          dispatch({
            type: "BOOKINGS_BODY",
@@ -43,7 +43,7 @@ export default class App extends Component {
       } else {
         stuffToRender.push(<Button
           onPress={this.fetchBookings.bind(this)}
-          title="Load bookings"
+          title="Load schedule"
           color="#841584"
           key="loadStuff"
         />);
@@ -53,9 +53,11 @@ export default class App extends Component {
       stuffToRender = stuffToRender.concat(mappedBookings);
     }
     return (
-      <ScrollView style={{paddingTop: 25}}>
-        {stuffToRender}
-      </ScrollView>
+      <View style={{marginTop: 70}}>
+        <ScrollView>
+          {stuffToRender}
+        </ScrollView>
+      </View>
     );
   }
 }
