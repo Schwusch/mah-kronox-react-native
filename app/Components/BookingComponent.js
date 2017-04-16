@@ -11,6 +11,8 @@ const style = StyleSheet.create({
     backgroundColor: '#527FE4',
     borderColor: '#000033',
     borderWidth: 1,
+    margin: 5,
+    padding: 5
   }
 });
 
@@ -18,7 +20,7 @@ export default class BookingComponent extends Component {
   render() {
     return (
       <View style={style.box}>
-        <Text>{this.props.text}</Text>
+        <Text>{this.props.booking.summary}</Text>
       </View>
     );
   }

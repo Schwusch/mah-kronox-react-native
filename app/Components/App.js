@@ -49,11 +49,11 @@ export default class App extends Component {
         />);
       }
     } else {
-      let mappedBookings = this.props.bookings.list.map(booking => <BookingComponent text={booking.summary} key={booking.uid}/>);
+      let mappedBookings = this.props.bookings.list.map(booking => <BookingComponent booking={booking} key={booking.uid}/>);
       stuffToRender = stuffToRender.concat(mappedBookings);
     }
     return (
-      <ScrollView style={{padding: 30}}>
+      <ScrollView style={{paddingTop: 25}}>
         {stuffToRender}
       </ScrollView>
     );
