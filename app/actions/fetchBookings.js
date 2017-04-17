@@ -17,3 +17,12 @@ export const fetchBookings = (program) => {
     })
   });
 }
+
+export const fetchAllBookings = () => {
+  store.dispatch({
+    type: actionTypes.RESET_BOOKINGS
+  });
+  for(program of store.getState().programs) {
+    fetchBookings(program)
+  }
+}

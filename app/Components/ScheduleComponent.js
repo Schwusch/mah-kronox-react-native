@@ -8,11 +8,12 @@ import {
   RefreshControl,
   Button
 } from 'react-native';
-import { fetchBookings } from '../actions/fetchBookings';
+import { fetchAllBookings } from '../actions/fetchBookings';
 import BookingComponent from './BookingComponent';
 import * as actionTypes from '../constants/actionTypes';
 import moment from 'moment';
 import Hr from 'react-native-hr'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var styles = StyleSheet.create({
   schedule: {
@@ -24,25 +25,19 @@ var styles = StyleSheet.create({
 })
 
 export default class ScheduleComponent extends Component {
-  onFetch () {
-    this.props.dispatch({
-      type: actionTypes.RESET_BOOKINGS
-    });
-    for(program of this.props.programs) {
-      fetchBookings(program)
-    }
-  }
-
   render() {
     let stuffToRender = [];
     if (!this.props.bookings.list.length && !this.props.bookings.loading && this.props.programs.length) {
         stuffToRender.push(
-          <Button
-            onPress={this.onFetch.bind(this)}
-            title="HÄMTA SCHEMA"
-            color="#841584"
+          <Icon.Button
+            size={30}
+            name="refresh"
+            backgroundColor="#FFF"
+            color="#000"
             key="loadStuff"
-          />);
+            disabled={!this.props.bookings.loading}
+            onPress={fetchAllBookings} />
+        );
     }
     if (!this.props.programs.length) {
       stuffToRender.push(
@@ -57,13 +52,13 @@ export default class ScheduleComponent extends Component {
     let mappedBookings = [];
     let lastDate = "";
     const bookings = this.props.bookings.list;
-    for(let i = 0; i < bookings.length; i++) {
-      let date = moment(bookings[i].start).format('MMMM Do YYYY');
+    for(booking of this.props.bookings.list) {
+      let date = moment(booking.start).format('MMMM Do YYYY');
       if(date !== lastDate) {
         mappedBookings.push(<Hr key={date} text={date} lineColor="#000"/>);
         lastDate = date;
       }
-      mappedBookings.push(<BookingComponent booking={bookings[i]} key={bookings[i].uid}/>);
+      mappedBookings.push(<BookingComponent booking={booking} key={booking.uid}/>);
     }
 
     stuffToRender = stuffToRender.concat(mappedBookings);
@@ -72,7 +67,7 @@ export default class ScheduleComponent extends Component {
         <ScrollView refreshControl={
             <RefreshControl
               refreshing={this.props.bookings.loading}
-              onRefresh={this.onFetch.bind(this)}
+              onRefresh={fetchAllBookings}
             />
           }>
           {stuffToRender}
