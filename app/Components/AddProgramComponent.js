@@ -100,7 +100,6 @@ export default class AddProgramComponent extends Component {
           placeholder="Skriv här!"
           onChangeText={ this.textChange.bind(this) }
         />
-        {/*
         <Button
           onPress={this.takeCareOfInput.bind(this)}
           title="ADD"
@@ -108,7 +107,6 @@ export default class AddProgramComponent extends Component {
           key="addProgram"
           disabled={this.state.text?false:true}
         />
-        */}
         {toBeRendered}
       </View>
     );
