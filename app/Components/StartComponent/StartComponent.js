@@ -3,6 +3,7 @@ import { Router, Scene } from 'react-native-router-flux';
 import { AppRegistry } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import App from '../App'
+import AddProgramComponent from '../AddProgramComponent'
 
 import store from '../../store/store';
 
@@ -15,6 +16,7 @@ export default class StartComponent extends Component {
         <RouterWithRedux>
             <Scene key="root" >
               <Scene key="app" component={App} title="Schedule" initial />
+              <Scene key="addProgram" component={AddProgramComponent} title="Add Program" />
             </Scene>
         </RouterWithRedux>
       </Provider>

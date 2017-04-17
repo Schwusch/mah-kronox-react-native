@@ -20,8 +20,8 @@ const bookingsReducer = (state={
   }
   return state;
 }
-
-const programsReducer = (state=[], action) => {
+const initialProgramState = ["THDTA14h", "THDTA15h", "THDTA16h"];
+const programsReducer = (state=initialProgramState, action) => {
   return state;
 }
 

@@ -6,11 +6,12 @@ import {
   Button,
   ScrollView,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
 import BookingComponent from './BookingComponent';
 import Swiper from 'react-native-swiper';
+import { Actions } from 'react-native-router-flux';
 
 var styles = StyleSheet.create({
   settings: {
@@ -69,6 +70,7 @@ export default class App extends Component {
       let mappedBookings = this.props.bookings.list.map(booking => <BookingComponent booking={booking} key={booking.uid}/>);
       stuffToRender = stuffToRender.concat(mappedBookings);
     }
+    const programs = this.props.programs.map(program => (<Text key={program}>{program}</Text>));
     return (
       <Swiper showsButtons={true} loop={false}>
         <View style={{marginTop: 70}}>
@@ -78,11 +80,17 @@ export default class App extends Component {
         </View>
         <View style={styles.settings}>
           <Text style={styles.text}>Here will be settings</Text>
+          {programs}
+          <Button
+            onPress={Actions.addProgram}
+            title="Add program or course"
+            color="#841584"
+            key="addProgram"
+          />
         </View>
       </Swiper>
     );
   }
 }
-
 
 AppRegistry.registerComponent('App', () => App);
