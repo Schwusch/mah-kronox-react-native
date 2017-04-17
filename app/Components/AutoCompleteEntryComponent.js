@@ -19,7 +19,7 @@ export default class AutoCompleteComponent extends Component {
     return (
       <View style={style.box}>
         <Text style={{fontWeight: 'bold'}}>{this.props.data.value}</Text>
-        <Text>{this.props.data.label.replace(/<(?:.|\n)*?>/gm, '')}</Text>
+        <Text>{this.props.data.label}</Text>
       </View>
     );
   }
