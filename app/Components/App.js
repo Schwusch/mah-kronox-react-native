@@ -22,6 +22,7 @@ export default class App extends Component {
         <ScheduleComponent
           bookings={this.props.bookings}
           programs={this.props.programs}
+          dispatch={this.props.dispatch}
         />
         <SettingsComponent
           programs={this.props.programs}

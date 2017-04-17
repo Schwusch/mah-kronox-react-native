@@ -11,16 +11,25 @@ const bookingsReducer = (state={
 
   if (action.type === actionTypes.BOOKINGS_BODY_PENDING) {
     state = {...state, loading: true};
+
   } else if (action.type === actionTypes.BOOKINGS_BODY_FULFILLED) {
     let bookingsMap = ical.parseICS(action.payload);
-    console.log(bookingsMap);
     let bookingsList = [];
     for (key in bookingsMap) {
       bookingsList.push(bookingsMap[key])
     }
+    bookingsList = bookingsList.concat(state.list);
+    bookingsList.sort((a, b) => {
+      return a.start - b.start;
+    });
     state = {...state, loading: false, list: bookingsList};
+
   } else if (action.type === actionTypes.FETCH_BOOKINGS_ERROR) {
     Alert.alert("Ingen internetanslutning!")
+
+  } else if (action.type === actionTypes.RESET_BOOKINGS) {
+    state = {...state, list: []};
+
   }
   return state;
 }

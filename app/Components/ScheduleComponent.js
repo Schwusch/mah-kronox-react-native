@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { fetchBookings } from '../actions/fetchBookings';
 import BookingComponent from './BookingComponent';
+import * as actionTypes from '../constants/actionTypes';
 
 var styles = StyleSheet.create({
   schedule: {
@@ -22,7 +23,12 @@ var styles = StyleSheet.create({
 
 export default class ScheduleComponent extends Component {
   onFetch () {
-    fetchBookings(this.props.programs[0])
+    this.props.dispatch({
+      type: actionTypes.RESET_BOOKINGS
+    });
+    for(program of this.props.programs) {
+      fetchBookings(program)
+    }
   }
 
   render() {
