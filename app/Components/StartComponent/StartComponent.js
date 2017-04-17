@@ -15,8 +15,8 @@ export default class StartComponent extends Component {
       <Provider store={store}>
         <RouterWithRedux>
             <Scene key="root" >
-              <Scene key="app" component={App} title="Schedule" initial />
-              <Scene key="addProgram" component={AddProgramComponent} title="Add Program" />
+              <Scene key="app" component={App} title="Schema" initial />
+              <Scene key="addProgram" component={AddProgramComponent} title="Lägg till Schema" />
             </Scene>
         </RouterWithRedux>
       </Provider>

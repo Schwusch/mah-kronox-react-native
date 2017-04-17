@@ -6,6 +6,7 @@ import {
   Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { REMOVE_PROGRAM } from '../constants/actionTypes'
 
 const style = StyleSheet.create({
   box: {
@@ -17,7 +18,7 @@ const style = StyleSheet.create({
 export default class ProgramComponent extends Component {
   onPressYes() {
     this.props.dispatch({
-      type: "REMOVE_PROGRAM",
+      type: REMOVE_PROGRAM,
       payload: this.props.program
     })
   }
@@ -27,11 +28,11 @@ export default class ProgramComponent extends Component {
     return (
       <View style={style.box}>
         <Icon.Button name="minus-circle" backgroundColor="#3b5998" onPress={() => Alert.alert(
-            'Delete',
-            `Delete ${program} from the list?`,
+            'Ta Bort',
+            `Ta bort ${program} från listan?`,
             [
-              {text: "Yes", onPress: this.onPressYes.bind(this)},
-              {text: "No", onPress: () => {}}
+              {text: "Ja", onPress: this.onPressYes.bind(this)},
+              {text: "Nej", onPress: () => {}}
             ]
           )}>
           {program}
