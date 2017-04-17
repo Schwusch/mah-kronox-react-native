@@ -6,7 +6,6 @@ import {
   StyleSheet
 } from 'react-native';
 import moment from 'moment'
-import Hr from 'react-native-hr'
 
 const style = StyleSheet.create({
   box: {
@@ -22,7 +21,6 @@ export default class BookingComponent extends Component {
     const end = moment(this.props.booking.end)
     return (
       <View>
-        <Hr text={start.format('MMMM Do YYYY')} lineColor="#000"/>
         <View style={style.box}>
           <Text>{this.props.booking.summary}</Text>
           <Text>Location: {this.props.booking.location}</Text>

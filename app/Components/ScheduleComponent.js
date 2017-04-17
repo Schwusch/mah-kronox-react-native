@@ -11,6 +11,8 @@ import {
 import { fetchBookings } from '../actions/fetchBookings';
 import BookingComponent from './BookingComponent';
 import * as actionTypes from '../constants/actionTypes';
+import moment from 'moment';
+import Hr from 'react-native-hr'
 
 var styles = StyleSheet.create({
   schedule: {
@@ -51,9 +53,20 @@ export default class ScheduleComponent extends Component {
         </Text>
       )
     }
-    let mappedBookings = this.props.bookings.list.map(booking => <BookingComponent booking={booking} key={booking.uid}/>);
-    stuffToRender = stuffToRender.concat(mappedBookings);
 
+    let mappedBookings = [];
+    let lastDate = "";
+    const bookings = this.props.bookings.list;
+    for(let i = 0; i < bookings.length; i++) {
+      let date = moment(bookings[i].start).format('MMMM Do YYYY');
+      if(date !== lastDate) {
+        mappedBookings.push(<Hr key={date} text={date} lineColor="#000"/>);
+        lastDate = date;
+      }
+      mappedBookings.push(<BookingComponent booking={bookings[i]} key={bookings[i].uid}/>);
+    }
+
+    stuffToRender = stuffToRender.concat(mappedBookings);
     return (
       <View style={styles.schedule}>
         <ScrollView refreshControl={

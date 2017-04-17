@@ -42,8 +42,8 @@ export default class AutoCompleteComponent extends Component {
     return (
       <TouchableHighlight onPress={this.onPress.bind(this)}>
         <View style={style.box}>
-            <Text>{this.props.data.label}</Text>
-            <Icon name={iconName} size={20} color="#900" />
+          <Icon name={iconName} size={20} color="#900" />
+          <Text>{this.props.data.label}</Text>
         </View>
       </TouchableHighlight>
     );
