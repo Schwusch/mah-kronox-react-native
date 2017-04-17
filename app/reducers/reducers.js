@@ -25,8 +25,7 @@ const bookingsReducer = (state={
   return state;
 }
 
-const initialProgramState = [];
-const programsReducer = (state=initialProgramState, action) => {
+const programsReducer = (state=[], action) => {
   if (action.type === actionTypes.ADD_PROGRAM) {
     state = state.concat(action.payload);
   } else if (action.type === actionTypes.ADD_KURS) {
@@ -37,7 +36,17 @@ const programsReducer = (state=initialProgramState, action) => {
   return state;
 }
 
+const autocompleteReducer = (state={data: [], loading: false}, action) => {
+  if (action.type === actionTypes.SET_AUTOCOMPLETE) {
+    state = {data: action.data, loading: false};
+  } else if (action.type === actionTypes.AUTOCOMPLETE_REQUEST) {
+    state = {data: [], loading: true};
+  }
+  return state;
+}
+
 export default reducers = combineReducers({
+  autocomplete: autocompleteReducer,
   routes: routes,
   bookings: bookingsReducer,
   programs: programsReducer
