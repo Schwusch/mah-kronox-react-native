@@ -26,9 +26,9 @@ export default class ProgramComponent extends Component {
     const program = this.props.program;
     return (
       <View style={style.box}>
-        <Icon.Button name="remove" backgroundColor="#3b5998" onPress={() => Alert.alert(
+        <Icon.Button name="minus-circle" backgroundColor="#3b5998" onPress={() => Alert.alert(
             'Delete',
-            "Delete " + program + " from the list?",
+            `Delete ${program} from the list?`,
             [
               {text: "Yes", onPress: this.onPressYes.bind(this)},
               {text: "No", onPress: () => {}}

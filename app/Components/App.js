@@ -13,6 +13,7 @@ import BookingComponent from './BookingComponent';
 import ProgramComponent from './ProgramComponent';
 import Swiper from 'react-native-swiper';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var styles = StyleSheet.create({
   settings: {
@@ -83,12 +84,14 @@ export default class App extends Component {
         <View style={styles.settings}>
           <Text style={styles.text}>Here will be settings</Text>
           {programs}
-          <Button
+          <Icon.Button
+            name="plus-circle"
             onPress={Actions.addProgram}
-            title="Add program or course"
-            color="#841584"
+            backgroundColor="#841584"
             key="addProgram"
-          />
+          >
+            Add program or course
+          </Icon.Button>
         </View>
       </Swiper>
     );
