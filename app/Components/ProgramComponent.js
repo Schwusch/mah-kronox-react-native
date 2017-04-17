@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Text,
   View,
   StyleSheet,
   Alert
@@ -11,25 +10,32 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const style = StyleSheet.create({
   box: {
     backgroundColor: '#9DD6EB',
-    margin: 5,
-    padding: 5
+    margin: 5
   }
 });
 
 export default class ProgramComponent extends Component {
+  onPressYes() {
+    this.props.dispatch({
+      type: "REMOVE_PROGRAM",
+      payload: this.props.program
+    })
+  }
+
   render() {
     const program = this.props.program;
     return (
-      <View>
-        <Text>{program}</Text>
+      <View style={style.box}>
         <Icon.Button name="remove" backgroundColor="#3b5998" onPress={() => Alert.alert(
             'Delete',
             "Delete " + program + " from the list?",
             [
-              {text: "Yes", onPress: () => console.log('"Yes" pressed')},
-              {text: "No", onPress: () => console.log('"No" pressed'), style: 'cancel'}
+              {text: "Yes", onPress: this.onPressYes.bind(this)},
+              {text: "No", onPress: () => {}}
             ]
-          )} />
+          )}>
+          {program}
+          </Icon.Button>
       </View>
     );
   }

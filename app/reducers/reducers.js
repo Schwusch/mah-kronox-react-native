@@ -21,7 +21,7 @@ const bookingsReducer = (state={
   return state;
 }
 
-const initialProgramState = ["THDTA14h", "THDTA15h", "THDTA16h"];
+const initialProgramState = ["THDTA15h"];
 const programsReducer = (state=initialProgramState, action) => {
   if (action.type === "ADD_PROGRAM") {
     state = state.concat(action.payload);

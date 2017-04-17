@@ -6,8 +6,7 @@ import {
   Button,
   ScrollView,
   ActivityIndicator,
-  StyleSheet,
-  Alert
+  StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
 import BookingComponent from './BookingComponent';
@@ -72,7 +71,7 @@ export default class App extends Component {
       let mappedBookings = this.props.bookings.list.map(booking => <BookingComponent booking={booking} key={booking.uid}/>);
       stuffToRender = stuffToRender.concat(mappedBookings);
     }
-    const programs = this.props.programs.map(program => <ProgramComponent program={program} key={program}/>);
+    const programs = this.props.programs.map(program => <ProgramComponent dispatch={this.props.dispatch} program={program} key={program}/>);
 
     return (
       <Swiper showsButtons={true} loop={false}>
