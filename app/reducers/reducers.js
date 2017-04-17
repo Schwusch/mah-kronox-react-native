@@ -20,8 +20,14 @@ const bookingsReducer = (state={
   }
   return state;
 }
+
 const initialProgramState = ["THDTA14h", "THDTA15h", "THDTA16h"];
 const programsReducer = (state=initialProgramState, action) => {
+  if (action.type === "ADD_PROGRAM") {
+    state = state.concat(action.payload);
+  } else if (action.type === "REMOVE_PROGRAM") {
+    state = state.filter(prgm => prgm !== action.payload);
+  }
   return state;
 }
 

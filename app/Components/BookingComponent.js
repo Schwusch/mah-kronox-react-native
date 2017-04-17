@@ -9,9 +9,7 @@ import moment from 'moment'
 
 const style = StyleSheet.create({
   box: {
-    backgroundColor: '#527FE4',
-    borderColor: '#000033',
-    borderWidth: 1,
+    backgroundColor: '#9DD6EB',
     margin: 5,
     padding: 5
   }

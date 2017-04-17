@@ -5,7 +5,9 @@ import {
   AppRegistry,
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TextInput,
+  Button
 } from 'react-native';
 
 var styles = StyleSheet.create({
@@ -28,10 +30,36 @@ var styles = StyleSheet.create({
   }
 })
 export default class AddProgramComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
+
+  takeCareOfInput() {
+    const programInput = this.state.text;
+    this.props.dispatch({
+      type: "ADD_PROGRAM",
+      payload: programInput
+    });
+    Actions.pop();
+  }
+
   render() {
     return (
       <View style={styles.view}>
         <Text style={styles.text}>Adding program here?</Text>
+        <TextInput
+          style={{height: 40, padding: 10, width: 300}}
+          placeholder="Type here to add a program!"
+          onChangeText={(text) => this.setState({text})}
+        />
+        <Button
+          onPress={this.takeCareOfInput.bind(this)}
+          title="ADD"
+          color="#841584"
+          key="addProgram"
+          disabled={this.state.text?false:true}
+        />
       </View>
     );
   }
