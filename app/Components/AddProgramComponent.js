@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import {
   AppRegistry,
   Text,
@@ -26,6 +25,11 @@ const styles = StyleSheet.create({
     marginTop: 64,
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
+  },
+  textinput: {
+    height: 40,
+    padding: 10,
+    width: 300
   }
 })
 
@@ -42,15 +46,6 @@ export default class AddProgramComponent extends Component {
       text: '',
       selectedOption: "Program"
     };
-  }
-
-  takeCareOfInput() {
-    const name = this.state.text;
-    this.props.dispatch({
-      type: `ADD_${this.state.selectedOption.toUpperCase()}`,
-      payload: name
-    });
-    Actions.pop();
   }
 
   setSelectedOption(selectedOption){
@@ -70,7 +65,14 @@ export default class AddProgramComponent extends Component {
   }
 
   render() {
-    const entries = this.props.autocomplete.data.map(entry => <AutoCompleteEntryComponent key={entry.value} data={entry}/>);
+    const entries = this.props.autocomplete.data.map(entry => (
+      <AutoCompleteEntryComponent
+        kindOfEntry={this.state.selectedOption.toUpperCase()}
+        alreadyAdded={this.props.programs.includes(entry.value)}
+        dispatch={this.props.dispatch}
+        key={entry.value}
+        data={entry}/>
+      ));
 
     let toBeRendered;
     if (this.props.autocomplete.loading) {
@@ -96,16 +98,9 @@ export default class AddProgramComponent extends Component {
           selectedOption={ this.state.selectedOption }
         />
         <TextInput
-          style={{height: 40, padding: 10, width: 300}}
+          style={styles.textinput}
           placeholder="Skriv här!"
           onChangeText={ this.textChange.bind(this) }
-        />
-        <Button
-          onPress={this.takeCareOfInput.bind(this)}
-          title="ADD"
-          color="#841584"
-          key="addProgram"
-          disabled={this.state.text?false:true}
         />
         {toBeRendered}
       </View>

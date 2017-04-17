@@ -3,24 +3,49 @@ import {
   AppRegistry,
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const style = StyleSheet.create({
   box: {
     backgroundColor: '#9DD6EB',
     margin: 5,
-    padding: 5
+    padding: 5,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textbox: {
+    flex: 1,
+    flexDirection: 'column',
+    margin: 5,
+    padding: 5,
+  },
+  text: {
+    flex: 1,
   }
 });
 
 export default class AutoCompleteComponent extends Component {
+  onPress() {
+    if(!this.props.alreadyAdded) {
+      this.props.dispatch({
+        type: `ADD_${this.props.kindOfEntry}`,
+        payload: this.props.data.value
+      });
+    }
+  }
   render() {
+    const iconName = this.props.alreadyAdded ? "check-square-o" : "square-o";
     return (
-      <View style={style.box}>
-        <Text style={{fontWeight: 'bold'}}>{this.props.data.value}</Text>
-        <Text>{this.props.data.label}</Text>
-      </View>
+      <TouchableHighlight onPress={this.onPress.bind(this)}>
+        <View style={style.box}>
+            <Text>{this.props.data.label}</Text>
+            <Icon name={iconName} size={20} color="#900" />
+        </View>
+      </TouchableHighlight>
     );
   }
 }
