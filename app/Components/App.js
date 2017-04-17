@@ -5,14 +5,31 @@ import {
   View,
   Button,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
 import BookingComponent from './BookingComponent';
+import Swiper from 'react-native-swiper';
+
+var styles = StyleSheet.create({
+  settings: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  }
+})
 
 @connect((store) => {
   return {
-    bookings: store.bookings
+    bookings: store.bookings,
+    programs: store.programs
   }
 })
 export default class App extends Component {
@@ -43,7 +60,7 @@ export default class App extends Component {
       } else {
         stuffToRender.push(<Button
           onPress={this.fetchBookings.bind(this)}
-          title="Load schedule"
+          title="LOAD SHEDULE"
           color="#841584"
           key="loadStuff"
         />);
@@ -53,11 +70,16 @@ export default class App extends Component {
       stuffToRender = stuffToRender.concat(mappedBookings);
     }
     return (
-      <View style={{marginTop: 70}}>
-        <ScrollView>
-          {stuffToRender}
-        </ScrollView>
-      </View>
+      <Swiper showsButtons={true} loop={false}>
+        <View style={{marginTop: 70}}>
+          <ScrollView>
+            {stuffToRender}
+          </ScrollView>
+        </View>
+        <View style={styles.settings}>
+          <Text style={styles.text}>Here will be settings</Text>
+        </View>
+      </Swiper>
     );
   }
 }

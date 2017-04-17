@@ -13,8 +13,8 @@ export default class StartComponent extends Component {
     return (
       <Provider store={store}>
         <RouterWithRedux>
-            <Scene key="root">
-              <Scene key="app" component={App} title="Schedule" initial={true} />
+            <Scene key="root" >
+              <Scene key="app" component={App} title="Schedule" initial />
             </Scene>
         </RouterWithRedux>
       </Provider>
