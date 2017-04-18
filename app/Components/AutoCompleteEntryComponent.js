@@ -7,6 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { fetchAllBookings } from '../actions/fetchBookings';
 
 const style = StyleSheet.create({
   box: {
@@ -35,6 +36,7 @@ export default class AutoCompleteComponent extends Component {
         type: `ADD_${this.props.kindOfEntry}`,
         payload: this.props.data.value
       });
+      fetchAllBookings();
     }
   }
   render() {

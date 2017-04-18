@@ -26,34 +26,28 @@ var styles = StyleSheet.create({
 
 export default class ScheduleComponent extends Component {
   render() {
-    let stuffToRender = [];
-    if (!this.props.bookings.list.length && !this.props.bookings.loading && this.props.programs.length) {
-        stuffToRender.push(
-          <Icon.Button
-            size={30}
-            name="refresh"
-            backgroundColor="#FFF"
-            color="#000"
-            key="loadStuff"
-            disabled={!this.props.bookings.loading}
-            onPress={fetchAllBookings} />
-        );
+    let allBookings = []
+    const programs = this.props.bookings.programs;
+    if(this.props.settings.separateSchedules){
+      for(booking of programs[this.props.specificProgram]){
+        allBookings.push(booking)
+      }
+    } else {
+      for(name in programs) {
+        for(booking of programs[name]){
+          allBookings.push(booking)
+        }
+      }
     }
-    if (!this.props.programs.length) {
-      stuffToRender.push(
-        <Text
-          key="infoTextWhenNoPrograms"
-          style={styles.text}>
-          Lägg till schema genom att dra åt sidan!
-        </Text>
-      )
-    }
+
+    allBookings.sort((a, b) => {
+      return a.start - b.start;
+    });
 
     let mappedBookings = [];
     let lastDate = "";
     let lastUid = "";
-    const bookings = this.props.bookings.list;
-    for(booking of this.props.bookings.list) {
+    for(booking of allBookings) {
       let date = moment(booking.start).format('MMMM Do YYYY');
       if(date !== lastDate) {
         mappedBookings.push(<Hr key={date} text={date} lineColor="#000"/>);
@@ -64,8 +58,6 @@ export default class ScheduleComponent extends Component {
         lastUid = booking.uid;
       }
     }
-
-    stuffToRender = stuffToRender.concat(mappedBookings);
     return (
       <View style={styles.schedule}>
         <ScrollView refreshControl={
@@ -74,7 +66,7 @@ export default class ScheduleComponent extends Component {
               onRefresh={fetchAllBookings}
             />
           }>
-          {stuffToRender}
+          {mappedBookings}
         </ScrollView>
       </View>
     )

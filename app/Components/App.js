@@ -12,22 +12,52 @@ import SettingsComponent from './SettingsComponent';
 @connect((store) => {
   return {
     bookings: store.bookings,
-    programs: store.programs
+    programs: store.programs,
+    settings: store.settings
   }
 })
 export default class App extends Component {
   render() {
-    return (
-      <Swiper showsButtons={true} loop={false}>
+    let swipes = [];
+    const programBookings = this.props.bookings.programs;
+    if(this.props.settings.separateSchedules){
+      for(program in programBookings) {
+        console.log("program:", program);
+        swipes.push(
+          <ScheduleComponent
+            key={program}
+            specificProgram={program}
+            bookings={this.props.bookings}
+            programs={this.props.programs}
+            dispatch={this.props.dispatch}
+            settings={this.props.settings}
+          />
+        )
+      }
+    } else {
+      swipes.push(
         <ScheduleComponent
+          key="onlySchedule"
           bookings={this.props.bookings}
           programs={this.props.programs}
           dispatch={this.props.dispatch}
+          settings={this.props.settings}
         />
-        <SettingsComponent
-          programs={this.props.programs}
-          dispatch={this.props.dispatch}
-        />
+      )
+    }
+
+    swipes.push(
+      <SettingsComponent
+        key="settings"
+        loading={this.props.bookings.loading}
+        programs={this.props.programs}
+        dispatch={this.props.dispatch}
+        settings={this.props.settings}
+      />
+    )
+    return (
+      <Swiper showsButtons={true} loop={false}>
+        {swipes}
       </Swiper>
     );
   }

@@ -5,7 +5,7 @@ import * as actionTypes from '../constants/actionTypes'
 import { Alert } from 'react-native'
 
 const bookingsReducer = (state={
-  list: [],
+  programs: {},
   loading: false
   }, action) => {
 
@@ -18,17 +18,19 @@ const bookingsReducer = (state={
     for (key in bookingsMap) {
       bookingsList.push(bookingsMap[key])
     }
-    bookingsList = bookingsList.concat(state.list);
+
     bookingsList.sort((a, b) => {
       return a.start - b.start;
     });
-    state = {...state, loading: false, list: bookingsList};
+    state.programs = {...state.programs}
+    state.programs[action.program] = bookingsList
+    state = {...state, loading: false};
 
   } else if (action.type === actionTypes.FETCH_BOOKINGS_ERROR) {
     Alert.alert("Ingen internetanslutning!")
 
   } else if (action.type === actionTypes.RESET_BOOKINGS) {
-    state = {...state, list: []};
+    state = {...state, programs: {}};
 
   }
   return state;
@@ -55,9 +57,17 @@ const autocompleteReducer = (state={data: [], loading: false}, action) => {
   return state;
 }
 
+const settingsReducer = (state={separateSchedules: true}, action) => {
+  if (action.type === actionTypes.SET_SHOW_SEPARATE_SCHEDULES) {
+    state = {...state, separateSchedules: action.payload};
+  }
+  return state;
+}
+
 export default reducers = combineReducers({
   autocomplete: autocompleteReducer,
   routes: routes,
   bookings: bookingsReducer,
-  programs: programsReducer
+  programs: programsReducer,
+  settings: settingsReducer
 })
