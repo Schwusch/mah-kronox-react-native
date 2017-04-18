@@ -51,6 +51,7 @@ export default class ScheduleComponent extends Component {
 
     let mappedBookings = [];
     let lastDate = "";
+    let lastUid = "";
     const bookings = this.props.bookings.list;
     for(booking of this.props.bookings.list) {
       let date = moment(booking.start).format('MMMM Do YYYY');
@@ -58,7 +59,10 @@ export default class ScheduleComponent extends Component {
         mappedBookings.push(<Hr key={date} text={date} lineColor="#000"/>);
         lastDate = date;
       }
-      mappedBookings.push(<BookingComponent booking={booking} key={booking.uid}/>);
+      if(booking.uid !== lastUid) {
+        mappedBookings.push(<BookingComponent booking={booking} key={booking.uid}/>);
+        lastUid = booking.uid;
+      }
     }
 
     stuffToRender = stuffToRender.concat(mappedBookings);
