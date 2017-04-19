@@ -19,8 +19,7 @@ var styles = StyleSheet.create({
   schedule: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 64
+    alignItems: 'center'
   }
 })
 
@@ -39,7 +38,7 @@ export default class ScheduleComponent extends Component {
         }
       }
     }
-    
+
     allBookings.sort((a, b) => {
       return a.start - b.start;
     });
@@ -64,7 +63,6 @@ export default class ScheduleComponent extends Component {
 
   render() {
     return (
-      <View style={styles.schedule}>
         <ScrollView refreshControl={
             <RefreshControl
               refreshing={this.props.bookings.loading}
@@ -73,7 +71,6 @@ export default class ScheduleComponent extends Component {
           }>
           {this.listComponentsToRender()}
         </ScrollView>
-      </View>
     )
   }
 }

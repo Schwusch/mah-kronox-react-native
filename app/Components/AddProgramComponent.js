@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
-    marginTop: 64,
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
   },
@@ -47,7 +46,7 @@ export default class AddProgramComponent extends Component {
       selectedOption: "Program"
     };
   }
-  
+
   setSelectedOption(selectedOption){
     this.setState({
       ...this.state,

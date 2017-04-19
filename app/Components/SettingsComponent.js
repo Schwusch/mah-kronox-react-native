@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Switch
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProgramComponent from './ProgramComponent';
 import * as actionTypes from '../constants/actionTypes';
@@ -16,8 +15,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-    marginTop: 64
+    backgroundColor: '#9DD6EB'
   },
   text: {
     color: '#841584',
@@ -48,14 +46,6 @@ export default class App extends Component {
           onValueChange={this.onSwitch.bind(this)}
           style={{marginBottom: 10}}
           value={this.props.settings.separateSchedules} />
-        <Icon.Button
-          name="plus-circle"
-          onPress={Actions.addProgram}
-          backgroundColor="#841584"
-          key="addProgram"
-        >
-          Lägg till program eller kurs
-        </Icon.Button>
         {programs}
       </View>
     )
