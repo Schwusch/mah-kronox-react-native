@@ -32,6 +32,10 @@ const bookingsReducer = (state={
   } else if (action.type === actionTypes.RESET_BOOKINGS) {
     state = {...state, programs: {}};
 
+  } else if (action.type === actionTypes.REMOVE_PROGRAM) {
+    let programs = {...state.programs}
+    delete programs[action.payload];
+    state = {...state, programs: programs};
   }
   return state;
 }

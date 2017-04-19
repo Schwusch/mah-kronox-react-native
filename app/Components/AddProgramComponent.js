@@ -13,7 +13,6 @@ import {
 import { SegmentedControls } from 'react-native-radio-buttons';
 import * as actionTypes from '../constants/actionTypes';
 import AutoCompleteEntryComponent from './AutoCompleteEntryComponent';
-//import NavBar from 'react-native-router-flux-nav-bar';
 
 const styles = StyleSheet.create({
   centering: {
@@ -48,11 +47,7 @@ export default class AddProgramComponent extends Component {
       selectedOption: "Program"
     };
   }
-/*
-  static renderNavigationBar(props) {
-    return NavBar
-  }
-*/
+  
   setSelectedOption(selectedOption){
     this.setState({
       ...this.state,

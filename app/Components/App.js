@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import ScheduleComponent from './ScheduleComponent';
 import SettingsComponent from './SettingsComponent';
-//import NavBar from 'react-native-router-flux-nav-bar';
 
 @connect((store) => {
   return {
@@ -18,17 +17,15 @@ import SettingsComponent from './SettingsComponent';
   }
 })
 export default class App extends Component {
-  /*
-  static renderNavigationBar(props) {
-    return NavBar
+  _onTouchEnd (e, state) {
+    console.log(e, state)
   }
-  */
+
   render() {
     let swipes = [];
     const programBookings = this.props.bookings.programs;
     if(this.props.settings.separateSchedules){
       for(program in programBookings) {
-        console.log("program:", program);
         swipes.push(
           <ScheduleComponent
             key={program}
@@ -43,7 +40,7 @@ export default class App extends Component {
     } else {
       swipes.push(
         <ScheduleComponent
-          key="onlySchedule"
+          key="Alla"
           bookings={this.props.bookings}
           programs={this.props.programs}
           dispatch={this.props.dispatch}
@@ -62,7 +59,10 @@ export default class App extends Component {
       />
     )
     return (
-      <Swiper showsButtons={true} loop={false}>
+      <Swiper
+        showsButtons={true}
+        loop={false}
+        onTouchEnd={this._onTouchEnd.bind(this)}>
         {swipes}
       </Swiper>
     );

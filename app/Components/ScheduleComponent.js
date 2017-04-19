@@ -25,7 +25,7 @@ var styles = StyleSheet.create({
 })
 
 export default class ScheduleComponent extends Component {
-  render() {
+  listComponentsToRender() {
     let allBookings = []
     const programs = this.props.bookings.programs;
     if(this.props.settings.separateSchedules){
@@ -39,18 +39,19 @@ export default class ScheduleComponent extends Component {
         }
       }
     }
-
+    
     allBookings.sort((a, b) => {
       return a.start - b.start;
     });
 
     let mappedBookings = [];
-    let lastDate = "";
+    let lastDate = moment([2000, 1, 1]);
     let lastUid = "";
     for(booking of allBookings) {
-      let date = moment(booking.start).format('MMMM Do YYYY');
-      if(date !== lastDate) {
-        mappedBookings.push(<Hr key={date} text={date} lineColor="#000"/>);
+      let date = moment(booking.start);
+      if(date.diff(lastDate, 'days') != 0) {
+        const dateString = date.format('MMMM Do YYYY')
+        mappedBookings.push(<Hr key={dateString} text={dateString} lineColor="#000"/>);
         lastDate = date;
       }
       if(booking.uid !== lastUid) {
@@ -58,6 +59,10 @@ export default class ScheduleComponent extends Component {
         lastUid = booking.uid;
       }
     }
+    return mappedBookings
+  }
+
+  render() {
     return (
       <View style={styles.schedule}>
         <ScrollView refreshControl={
@@ -66,7 +71,7 @@ export default class ScheduleComponent extends Component {
               onRefresh={fetchAllBookings}
             />
           }>
-          {mappedBookings}
+          {this.listComponentsToRender()}
         </ScrollView>
       </View>
     )
