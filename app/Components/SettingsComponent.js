@@ -10,7 +10,6 @@ import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProgramComponent from './ProgramComponent';
 import * as actionTypes from '../constants/actionTypes';
-import { fetchAllBookings } from '../actions/fetchBookings';
 
 var styles = StyleSheet.create({
   settings: {
@@ -42,16 +41,6 @@ export default class App extends Component {
 
     return (
       <View style={styles.settings}>
-        <View style={{marginBottom: 10}}>
-          <Icon.Button
-            size={30}
-            name="refresh"
-            backgroundColor="#FFF"
-            color="#000"
-            key="loadStuff"
-            disabled={!this.props.loading}
-            onPress={fetchAllBookings} />
-        </View>
         <Text style={styles.text}>
           Visa scheman i separata flikar
         </Text>
