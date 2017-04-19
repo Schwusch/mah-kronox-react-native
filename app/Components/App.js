@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import ScheduleComponent from './ScheduleComponent';
 import SettingsComponent from './SettingsComponent';
+import { Actions } from 'react-native-router-flux';
 
 @connect((store) => {
   return {
@@ -18,7 +19,7 @@ import SettingsComponent from './SettingsComponent';
 })
 export default class App extends Component {
   _onTouchEnd (e, state) {
-    console.log(e, state)
+    Actions.refresh({title: this.state.keys[state.index]})
   }
 
   render() {
@@ -51,18 +52,23 @@ export default class App extends Component {
 
     swipes.push(
       <SettingsComponent
-        key="settings"
+        key="Inställningar"
         loading={this.props.bookings.loading}
         programs={this.props.programs}
         dispatch={this.props.dispatch}
         settings={this.props.settings}
       />
     )
+    let keys = [];
+    for(comp of swipes) {
+      keys.push(comp.key)
+    }
+    this.state = {...this.state, keys: keys};
     return (
       <Swiper
         showsButtons={true}
         loop={false}
-        onTouchEnd={this._onTouchEnd.bind(this)}>
+        onMomentumScrollEnd={this._onTouchEnd.bind(this)}>
         {swipes}
       </Swiper>
     );
