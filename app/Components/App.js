@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import ScheduleComponent from './ScheduleComponent';
 import SettingsComponent from './SettingsComponent';
+//import NavBar from 'react-native-router-flux-nav-bar';
 
 @connect((store) => {
   return {
@@ -17,6 +18,11 @@ import SettingsComponent from './SettingsComponent';
   }
 })
 export default class App extends Component {
+  /*
+  static renderNavigationBar(props) {
+    return NavBar
+  }
+  */
   render() {
     let swipes = [];
     const programBookings = this.props.bookings.programs;
