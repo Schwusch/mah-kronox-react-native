@@ -18,10 +18,6 @@ const bookingsReducer = (state={
     for (key in bookingsMap) {
       bookingsList.push(bookingsMap[key])
     }
-
-    bookingsList.sort((a, b) => {
-      return a.start - b.start;
-    });
     state.programs = {...state.programs}
     state.programs[action.program.name] = bookingsList
     state = {...state, loading: false};
