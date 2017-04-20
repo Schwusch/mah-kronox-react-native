@@ -34,7 +34,7 @@ export default class AutoCompleteComponent extends Component {
     if(!this.props.alreadyAdded) {
       this.props.dispatch({
         type: `ADD_${this.props.kindOfEntry}`,
-        payload: this.props.data.value
+        payload: {name: this.props.data.value, type: this.props.kindOfEntry}
       });
       fetchAllBookings();
     }

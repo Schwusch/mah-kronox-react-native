@@ -23,7 +23,7 @@ const bookingsReducer = (state={
       return a.start - b.start;
     });
     state.programs = {...state.programs}
-    state.programs[action.program] = bookingsList
+    state.programs[action.program.name] = bookingsList
     state = {...state, loading: false};
 
   } else if (action.type === actionTypes.FETCH_BOOKINGS_ERROR) {
@@ -46,7 +46,7 @@ const programsReducer = (state=[], action) => {
   } else if (action.type === actionTypes.ADD_KURS) {
     state = state.concat(action.payload);
   } else if (action.type === actionTypes.REMOVE_PROGRAM) {
-    state = state.filter(prgm => prgm !== action.payload);
+    state = state.filter(prgm => prgm.name !== action.payload);
   }
   return state;
 }

@@ -28,7 +28,8 @@ export default class ScheduleComponent extends Component {
     let allBookings = []
     const programs = this.props.bookings.programs;
     if(this.props.settings.separateSchedules){
-      for(booking of programs[this.props.specificProgram]){
+      const bookings = programs[this.props.specificProgram]
+      for(booking of bookings){
         allBookings.push(booking)
       }
     } else {

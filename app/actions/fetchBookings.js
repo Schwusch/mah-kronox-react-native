@@ -3,7 +3,8 @@ import * as actionTypes from '../constants/actionTypes';
 
 export const fetchBookings = (program) => {
   const baseUrl = "https://kronox.mah.se/setup/jsp/SchemaICAL.ics";
-  const parameters = `?startDatum=idag&intervallTyp=m&intervallAntal=6&sokMedAND=false&sprak=SV&resurser=p.${program}`
+  const prefix = program.type === "KURS" ? "k" : "p";
+  const parameters = `?startDatum=idag&intervallTyp=m&intervallAntal=6&sokMedAND=false&sprak=SV&resurser=${prefix}.${program.name}`
   store.dispatch({
     type: actionTypes.BOOKINGS_BODY_PENDING
   });

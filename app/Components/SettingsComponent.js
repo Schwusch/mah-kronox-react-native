@@ -34,7 +34,7 @@ export default class App extends Component {
 
   render() {
     const programs = this.props.programs.map(program =>
-      <ProgramComponent dispatch={this.props.dispatch} program={program} key={program}/>
+      <ProgramComponent dispatch={this.props.dispatch} program={program.name} key={program.name}/>
     );
 
     return (

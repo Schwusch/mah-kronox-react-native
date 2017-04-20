@@ -67,7 +67,7 @@ export default class AddProgramComponent extends Component {
     const entries = this.props.autocomplete.data.map(entry => (
       <AutoCompleteEntryComponent
         kindOfEntry={this.state.selectedOption.toUpperCase()}
-        alreadyAdded={this.props.programs.includes(entry.value)}
+        alreadyAdded={this.props.programs.filter(program => entry.value === program.name).length > 0}
         dispatch={this.props.dispatch}
         key={entry.value}
         data={entry}/>
