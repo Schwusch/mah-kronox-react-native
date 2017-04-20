@@ -33,8 +33,10 @@ export default class App extends Component {
   }
 
   render() {
-    const programs = this.props.programs.map(program =>
-      <ProgramComponent dispatch={this.props.dispatch} program={program.name} key={program.name}/>
+    const programs = this.props.programs.map(program => {
+        const name = program.type === "PROGRAM" ? program.name : program.name.trim().slice(0, -1);
+        return <ProgramComponent dispatch={this.props.dispatch} program={name} name={program.name}  key={name}/>
+      }
     );
 
     return (

@@ -23,14 +23,15 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 export default class App extends Component {
   render() {
     let swipes = [];
-    const programs= this.props.bookings.programs;
+    const programs= this.props.programs;
     if(this.props.settings.separateSchedules){
-      for(program in programs) {
+      for(program of programs) {
+        const name = program.type === "PROGRAM" ? program.name : program.name.trim().slice(0, -1);
         swipes.push(
           <ScheduleComponent
-            key={program}
-            tabLabel={program}
-            specificProgram={program}
+            key={name}
+            tabLabel={name}
+            specificProgram={program.name}
             bookings={this.props.bookings}
             programs={this.props.programs}
             dispatch={this.props.dispatch}

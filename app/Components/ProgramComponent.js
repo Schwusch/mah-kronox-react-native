@@ -19,7 +19,7 @@ export default class ProgramComponent extends Component {
   onPressYes() {
     this.props.dispatch({
       type: REMOVE_PROGRAM,
-      payload: this.props.program
+      payload: this.props.name
     })
   }
 
