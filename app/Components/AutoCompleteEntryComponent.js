@@ -11,7 +11,7 @@ import { fetchAllBookings } from '../actions/fetchBookings';
 
 const style = StyleSheet.create({
   box: {
-    backgroundColor: '#9DD6EB',
+    backgroundColor: '#C9CDD6',
     margin: 5,
     padding: 5,
     flex: 1,
@@ -44,7 +44,7 @@ export default class AutoCompleteComponent extends Component {
     return (
       <TouchableHighlight onPress={this.onPress.bind(this)}>
         <View style={style.box}>
-          <Icon name={iconName} size={20} color="#900" />
+          <Icon name={iconName} size={20} color="#522B47" />
           <Text>{this.props.data.label}</Text>
         </View>
       </TouchableHighlight>

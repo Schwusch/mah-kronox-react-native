@@ -53,7 +53,11 @@ export default class App extends Component {
     }
 
     return (
-      <ScrollableTabView>
+      <ScrollableTabView
+        tabBarBackgroundColor="#633355"
+        tabBarActiveTextColor="#FFFFFF"
+        tabBarUnderlineStyle={{backgroundColor: "#A591C1"}}
+        >
         {swipes}
         <SettingsComponent
           key="Inställningar"

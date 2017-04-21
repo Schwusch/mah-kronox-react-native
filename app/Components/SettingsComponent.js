@@ -15,7 +15,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB'
+    backgroundColor: '#EFF4FF'
   },
   text: {
     color: '#841584',
@@ -45,6 +45,7 @@ export default class App extends Component {
           Visa scheman i separata flikar
         </Text>
         <Switch
+          onTintColor="#A591C1"
           onValueChange={this.onSwitch.bind(this)}
           style={{marginBottom: 10}}
           value={this.props.settings.separateSchedules} />

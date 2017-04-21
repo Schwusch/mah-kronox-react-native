@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
+    backgroundColor: '#EFF4FF',
   },
   textinput: {
     height: 40,
@@ -92,6 +92,8 @@ export default class AddProgramComponent extends Component {
     return (
       <View style={styles.view}>
         <SegmentedControls
+          backTint= {'#FFFFFF'}
+          tint={'#C9CDD6'}
           options={ ["Program", "Kurs"] }
           onSelection={ this.setSelectedOption.bind(this) }
           selectedOption={ this.state.selectedOption }

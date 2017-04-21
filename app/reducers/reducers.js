@@ -13,10 +13,22 @@ const bookingsReducer = (state={
     state = {...state, loading: true};
 
   } else if (action.type === actionTypes.BOOKINGS_BODY_FULFILLED) {
+    const regCourse = /.*?(?= Sign)/;
+    const regSign = /.*?(?= Moment)/;
+    const regMoment = /.*?(?= Program)/;
+
     let bookingsMap = ical.parseICS(action.payload);
     let bookingsList = [];
     for (key in bookingsMap) {
-      bookingsList.push(bookingsMap[key])
+      let summary = bookingsMap[key].summary.replace("Kurs.grp: ", "");
+      const course = regCourse.exec(summary)[0];
+      summary = summary.replace(course + " Sign: ", "");
+      let signatures = regSign.exec(summary)[0];
+      summary = summary.replace(signatures + " Moment: ", "");
+      signatures = signatures.split(" ");
+      const moment = regMoment.exec(summary)[0];
+      const booking = {...bookingsMap[key], course: course, signatures: signatures, moment: moment}
+      bookingsList.push(booking)
     }
     state.programs = {...state.programs}
     state.programs[action.program.name] = bookingsList

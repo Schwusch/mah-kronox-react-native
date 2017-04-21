@@ -27,7 +27,7 @@ export default class ProgramComponent extends Component {
     const program = this.props.program;
     return (
       <View style={style.box}>
-        <Icon.Button name="minus-circle" backgroundColor="#3b5998" onPress={() => Alert.alert(
+        <Icon.Button name="minus-circle" backgroundColor="#522B47" onPress={() => Alert.alert(
             'Ta Bort',
             `Ta bort ${program} från listan?`,
             [
