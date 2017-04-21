@@ -11,6 +11,7 @@ import SettingsComponent from './SettingsComponent';
 import AddProgramComponent from './AddProgramComponent'
 import { Actions } from 'react-native-router-flux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import * as actionTypes from '../constants/actionTypes';
 
 @connect((store) => {
   return {
@@ -57,6 +58,7 @@ export default class App extends Component {
         tabBarBackgroundColor="#633355"
         tabBarActiveTextColor="#FFFFFF"
         tabBarUnderlineStyle={{backgroundColor: "#A591C1"}}
+        onChangeTab={(index) => {this.props.dispatch({type: actionTypes.RESET_AUTOCOMPLETE})}}
         >
         {swipes}
         <SettingsComponent

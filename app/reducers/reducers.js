@@ -65,6 +65,8 @@ const autocompleteReducer = (state={data: [], loading: false}, action) => {
     state = {data: action.data, loading: false};
   } else if (action.type === actionTypes.AUTOCOMPLETE_REQUEST) {
     state = {data: [], loading: true};
+  } else if (action.type === actionTypes.RESET_AUTOCOMPLETE) {
+    state = {data: [], loading: false};
   }
   return state;
 }
