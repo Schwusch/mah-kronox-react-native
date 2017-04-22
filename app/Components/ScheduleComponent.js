@@ -75,7 +75,7 @@ export default class ScheduleComponent extends Component {
         weeks.push(
           <View style={styles.week} key={uniqueId()}>
             <View style={styles.weekHeader}>
-              <Text style={[styles.text, {fontSize: 30,}]}>{week}</Text>
+              <Text style={[styles.text, {fontSize: 30,}]}>{"v." + week}</Text>
             </View>
             {mappedBookings}
           </View>

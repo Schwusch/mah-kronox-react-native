@@ -11,20 +11,21 @@ import { fetchAllBookings } from '../actions/fetchBookings';
 
 const style = StyleSheet.create({
   box: {
-    backgroundColor: '#C9CDD6',
+    backgroundColor: '#EFF4FF',
     margin: 5,
     padding: 5,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   textbox: {
-    flex: 1,
-    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    flex: 7,
     margin: 5,
     padding: 5,
   },
-  text: {
+  icon: {
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
   }
 });
@@ -42,12 +43,18 @@ export default class AutoCompleteComponent extends Component {
   render() {
     const iconName = this.props.alreadyAdded ? "check-square-o" : "square-o";
     return (
-      <TouchableHighlight onPress={this.onPress.bind(this)}>
-        <View style={style.box}>
-          <Icon name={iconName} size={20} color="#522B47" />
-          <Text>{this.props.data.label}</Text>
-        </View>
-      </TouchableHighlight>
+      <View>
+        <TouchableHighlight onPress={this.onPress.bind(this)}>
+          <View style={style.box}>
+            <View style={style.icon}>
+              <Icon name={iconName} size={30} color="#522B47" />
+            </View>
+            <View style={style.textbox}>
+              <Text>{this.props.data.label}</Text>
+            </View>
+          </View>
+        </TouchableHighlight>
+      </View>
     );
   }
 }

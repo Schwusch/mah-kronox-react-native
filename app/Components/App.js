@@ -56,6 +56,7 @@ export default class App extends Component {
     return (
       <ScrollableTabView
         tabBarBackgroundColor="#633355"
+        tabBarInactiveTextColor="gray"
         tabBarActiveTextColor="#FFFFFF"
         tabBarUnderlineStyle={{backgroundColor: "#A591C1"}}
         onChangeTab={(index) => {this.props.dispatch({type: actionTypes.RESET_AUTOCOMPLETE})}}

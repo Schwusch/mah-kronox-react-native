@@ -20,7 +20,7 @@ var styles = StyleSheet.create({
     paddingRight: 10
   },
   text: {
-    color: "#ffffff"
+    color: "#000000"
   }
 })
 
