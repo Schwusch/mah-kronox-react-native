@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import * as actionTypes from '../constants/actionTypes';
 
 function log(data) {
-  console.log("Autocomplete data:", data);
   return {
     type: actionTypes.SET_AUTOCOMPLETE,
     data
