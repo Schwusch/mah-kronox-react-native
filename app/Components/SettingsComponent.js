@@ -3,6 +3,7 @@ import ProgramComponent from './ProgramComponent';
 import * as actionTypes from '../constants/actionTypes';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { fetchAllBookings } from '../actions/fetchBookings'
 import {
   Container,
   Content,
@@ -15,9 +16,19 @@ import {
   Body,
   Icon,
   Button,
-  Title
+  Title,
+  ActionSheet,
+  Separator
 } from 'native-base';
 
+const BUTTONS = [
+  '3 Månader',
+  '6 Månader',
+];
+const MONTHS = [
+  3,
+  6
+]
 @connect((store) => {
   return {
     bookings: store.bookings,
@@ -66,6 +77,9 @@ export default class App extends Component {
           </Right>
         </Header>
         <Content>
+          <Separator bordered>
+              <Text>Inställningar</Text>
+          </Separator>
           <ListItem icon>
               <Left>
                   <Icon name="md-map" />
@@ -79,9 +93,38 @@ export default class App extends Component {
                   value={this.props.settings.separateSchedules} />
               </Right>
           </ListItem>
-          <ListItem itemDivider>
-              <Text>Scheman</Text>
+          <ListItem icon>
+            <Left>
+                <Icon name="md-clock" />
+            </Left>
+            <Body>
+              <Text>Antal månader</Text>
+            </Body>
+            <Right>
+              <Button
+                bordered
+                rounded
+                onPress={() =>
+                  ActionSheet.show(
+                    {
+                      options: BUTTONS,
+                      title: 'Månader'
+                    },
+                    (buttonIndex) => {
+                      this.props.dispatch({
+                        type: actionTypes.SET_SETTING_MONTHS,
+                        payload: MONTHS[buttonIndex]
+                      });
+                      fetchAllBookings();
+                    }
+                    )}>
+                <Text>{this.props.settings.months}</Text>
+              </Button>
+            </Right>
           </ListItem>
+          <Separator bordered>
+              <Text>Scheman</Text>
+          </Separator>
           {programs}
         </Content>
       </Container>
