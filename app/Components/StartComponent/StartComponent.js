@@ -2,11 +2,15 @@ import 'rxjs';
 import React, { Component } from 'react';
 import { AppRegistry, AppState } from 'react-native';
 import { connect, Provider } from 'react-redux';
-import App from '../App'
-import AddProgramComponent from '../AddProgramComponent'
 import { fetchAllBookings } from '../../actions/fetchBookings'
-
+import { Router, Scene } from 'react-native-router-flux';
 import store from '../../store/store';
+import SettingsComponent from '../SettingsComponent'
+import AddProgramComponent from '../AddProgramComponent'
+import AllSchedules from '../AllSchedules'
+import { Toast } from 'native-base'
+
+const RouterWithRedux = connect()(Router);
 
 export default class StartComponent extends Component {
   state = {
@@ -24,6 +28,11 @@ export default class StartComponent extends Component {
   _handleAppStateChange = (nextAppState) => {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
       fetchAllBookings();
+      Toast.show({
+              text: 'Uppdaterar schema',
+              position: 'bottom',
+              duration: 2000
+            })
     }
     this.setState({appState: nextAppState});
   }
@@ -31,7 +40,13 @@ export default class StartComponent extends Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <RouterWithRedux>
+            <Scene key="root" hideNavBar= "true">
+              <Scene key="AllSchedules" component={AllSchedules} initial={true}/>
+              <Scene key="Settings" component={SettingsComponent}/>
+              <Scene key="AddPrograms" component={AddProgramComponent}/>
+            </Scene>
+        </RouterWithRedux>
       </Provider>
     );
   }

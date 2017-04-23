@@ -1,44 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  AppRegistry,
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  Button,
-  ScrollView,
-  ActivityIndicator
-} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import * as actionTypes from '../constants/actionTypes';
 import AutoCompleteEntryComponent from './AutoCompleteEntryComponent';
-
-const styles = StyleSheet.create({
-  centering: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8,
-  },
-  view: {
-    flex: 1,
-    backgroundColor: '#EFF4FF',
-  },
-  textinput: {
-    flex: 1,
-    height: 40,
-    padding: 10,
-    width: 300
-  },
-  wrapper: {
-    justifyContent: 'center',
-    height: 90,
-    flex: 1
-  },
-  autocompletes: {
-    flex: 7
-  }
-})
+import {
+  Container,
+  Content,
+  Header,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Button,
+  Title,
+  Item,
+  Input,
+  Spinner,
+  List
+} from 'native-base';
 
 @connect((store) => {
   return {
@@ -83,42 +63,48 @@ export default class AddProgramComponent extends Component {
 
     let toBeRendered;
     if (this.props.autocomplete.loading) {
-      toBeRendered = (
-        <ActivityIndicator
-          style={[styles.centering, {height: 80}]}
-          size="large"
-        />
-      );
+      toBeRendered = <Spinner/>;
     } else {
-      toBeRendered = (
-        <ScrollView>
-          {entries}
-        </ScrollView>
-      );
+      toBeRendered = entries;
     }
 
     return (
-      <View style={styles.view}>
-        <View style={styles.wrapper}>
+      <Container>
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.dispatch({type: actionTypes.RESET_AUTOCOMPLETE})
+                Actions.pop();
+              }}
+              >
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+              <Title>Lägg till</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content>
           <SegmentedControls
-            backTint= {'#FFFFFF'}
-            tint={'#A591C1'}
             options={ ["Program", "Kurs"] }
             onSelection={ this.setSelectedOption.bind(this) }
             selectedOption={ this.state.selectedOption }
           />
-          <TextInput
-            style={styles.textinput}
-            placeholder="Skriv här!"
-            onChangeText={ this.textChange.bind(this) }
-          />
-        </View>
-        <View style={styles.autocompletes}>
-          {toBeRendered}
-        </View>
-      </View>
+          <Item underline>
+              <Input
+                placeholder='Skriv här!'
+                onChangeText={ this.textChange.bind(this) }
+              />
+          </Item>
+
+          <List>
+            {toBeRendered}
+          </List>
+        </Content>
+      </Container>
     );
   }
 }
-
-AppRegistry.registerComponent('AddProgramComponent', () => AddProgramComponent);
