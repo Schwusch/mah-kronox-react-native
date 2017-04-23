@@ -16,6 +16,7 @@ import moment from 'moment';
 import Hr from 'react-native-hr';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import uniqueId from 'lodash.uniqueid';
+import { Content } from 'native-base';
 
 var styles = StyleSheet.create({
   schedule: {
@@ -100,16 +101,9 @@ export default class ScheduleComponent extends Component {
 
   render() {
     return (
-        <ScrollView
-          style={styles.schedule}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.props.bookings.loading}
-              onRefresh={fetchAllBookings}
-            />
-          }>
+        <Content>
           {this.listComponentsToRender()}
-        </ScrollView>
+        </Content>
     )
   }
 }

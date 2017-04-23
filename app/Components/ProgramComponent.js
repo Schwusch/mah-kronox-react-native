@@ -1,45 +1,37 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  View,
-  StyleSheet,
-  Alert
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { REMOVE_PROGRAM } from '../constants/actionTypes'
-
-const style = StyleSheet.create({
-  box: {
-    backgroundColor: '#9DD6EB',
-    margin: 5
-  }
-});
+import { REMOVE_PROGRAM } from '../constants/actionTypes';
+import {Text, ListItem, Right, Body, Icon, Button} from 'native-base';
+import { Alert } from 'react-native';
 
 export default class ProgramComponent extends Component {
   onPressYes() {
     this.props.dispatch({
       type: REMOVE_PROGRAM,
-      payload: this.props.name
+      payload: { name: this.props.name }
     })
   }
 
   render() {
     const program = this.props.program;
     return (
-      <View style={style.box}>
-        <Icon.Button name="minus-circle" backgroundColor="#522B47" onPress={() => Alert.alert(
-            'Ta Bort',
-            `Ta bort ${program} från listan?`,
-            [
-              {text: "Ja", onPress: this.onPressYes.bind(this)},
-              {text: "Nej", onPress: () => {}}
-            ]
-          )}>
-          {program}
-          </Icon.Button>
-      </View>
+        <ListItem icon>
+            <Body>
+              <Text>{program}</Text>
+            </Body>
+            <Right>
+              <Button transparent danger
+                onPress={() => Alert.alert(
+                  'Ta Bort',
+                  `Ta bort ${program} från listan?`,
+                  [
+                    {text: "Ja", onPress: this.onPressYes.bind(this)},
+                    {text: "Nej", onPress: () => {}}
+                  ]
+                )}>
+                  <Text> Ta Bort</Text>
+              </Button>
+            </Right>
+        </ListItem>
     );
   }
 }
-
-AppRegistry.registerComponent('ProgramComponent', () => ProgramComponent);

@@ -1,34 +1,6 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { fetchAllBookings } from '../actions/fetchBookings';
-
-const style = StyleSheet.create({
-  box: {
-    backgroundColor: '#EFF4FF',
-    margin: 5,
-    padding: 5,
-    flex: 1,
-    flexDirection: 'row',
-  },
-  textbox: {
-    backgroundColor: '#FFFFFF',
-    flex: 7,
-    margin: 5,
-    padding: 5,
-  },
-  icon: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  }
-});
+import { ListItem, Left, Body, Right, Text, Icon, CheckBox } from 'native-base';
 
 export default class AutoCompleteComponent extends Component {
   onPress() {
@@ -38,25 +10,24 @@ export default class AutoCompleteComponent extends Component {
         payload: {name: this.props.data.value, type: this.props.kindOfEntry}
       });
       fetchAllBookings();
+    } else {
+      this.props.dispatch({
+        type: `REMOVE_${this.props.kindOfEntry}`,
+        payload: {name: this.props.data.value, type: this.props.kindOfEntry}
+      });
     }
   }
   render() {
-    const iconName = this.props.alreadyAdded ? "check-square-o" : "square-o";
+    const iconName = this.props.alreadyAdded ? "md-checkmark-circle" : "md-checkmark-circle-outline";
     return (
-      <View>
-        <TouchableHighlight onPress={this.onPress.bind(this)}>
-          <View style={style.box}>
-            <View style={style.icon}>
-              <Icon name={iconName} size={30} color="#522B47" />
-            </View>
-            <View style={style.textbox}>
-              <Text>{this.props.data.label}</Text>
-            </View>
-          </View>
-        </TouchableHighlight>
-      </View>
+      <ListItem onPress={this.onPress.bind(this)}>
+        <Left>
+          <Text>{this.props.data.label}</Text>
+        </Left>
+        <Right>
+          <Icon name={iconName} />
+        </Right>
+      </ListItem>
     );
   }
 }
-
-AppRegistry.registerComponent('AutoCompleteComponent', () => AutoCompleteComponent);

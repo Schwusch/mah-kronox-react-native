@@ -6,7 +6,7 @@ export default programsReducer = (state=[], action) => {
   } else if (action.type === actionTypes.ADD_KURS) {
     state = state.concat(action.payload);
   } else if (action.type === actionTypes.REMOVE_PROGRAM) {
-    state = state.filter(prgm => prgm.name !== action.payload);
+    state = state.filter(prgm => prgm.name !== action.payload.name);
   }
   return state;
 }
