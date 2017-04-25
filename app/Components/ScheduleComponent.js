@@ -75,15 +75,18 @@ export default class ScheduleComponent extends Component {
     let weeks = [];
     let lastDate = moment([2000, 1, 1]);
     let lastUid = "";
-    let lastweek = -1;
+    let lastweek;
+    if(allBookings.length > 0) {
+      lastweek = moment(allBookings[0].start).isoWeek();
+    }
     for(booking of allBookings) {
       const date = moment(booking.start);
       const week = date.isoWeek();
-      if(week !== lastweek && lastweek != -1) {
+      if(week !== lastweek) {
         weeks.push(
           <View style={styles.week} key={uniqueId()}>
             <View style={styles.weekHeader}>
-              <Text style={[styles.text, {fontSize: 30,}]}>{"v." + week}</Text>
+              <Text style={[styles.text, {fontSize: 30,}]}>{"v." + lastweek}</Text>
             </View>
             {mappedBookings}
           </View>
