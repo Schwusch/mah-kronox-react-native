@@ -106,6 +106,18 @@ export default class ScheduleComponent extends Component {
       lastweek = week;
       lastDate = date;
     }
+
+    if(mappedBookings.length > 0) {
+      weeks.push(
+        <View style={styles.week} key={uniqueId()}>
+          <View style={styles.weekHeader}>
+            <Text style={[styles.text, {fontSize: 30,}]}>{"v." + lastweek}</Text>
+          </View>
+          {mappedBookings}
+        </View>
+      );
+    }
+    
     return weeks
   }
 
