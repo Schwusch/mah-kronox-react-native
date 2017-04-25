@@ -66,10 +66,7 @@ export default bookingsReducer = (state={
     let signatures = {...state.signatures}
     signatures[list[0]] = {name: list[1], loading: false}
     state = {...state, signatures: signatures};
-  } else if (action.type === actionTypes.SET_SIGNATURE_LOADING) {
-    let signatures = {...state.signatures}
-    signatures[action.payload] = {loading: true}
-    state = {...state, signatures: signatures};
   }
+  
   return state;
 }
