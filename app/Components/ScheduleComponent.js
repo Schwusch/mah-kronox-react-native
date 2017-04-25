@@ -13,7 +13,6 @@ import BookingComponent from './BookingComponent';
 import ListDateComponent from './ListDateComponent';
 import * as actionTypes from '../constants/actionTypes';
 import moment from 'moment';
-import Hr from 'react-native-hr';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import uniqueId from 'lodash.uniqueid';
 import { Content } from 'native-base';
@@ -117,7 +116,7 @@ export default class ScheduleComponent extends Component {
         </View>
       );
     }
-    
+
     return weeks
   }
 
