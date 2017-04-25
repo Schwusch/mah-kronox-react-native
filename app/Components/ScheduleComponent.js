@@ -40,9 +40,16 @@ var styles = StyleSheet.create({
 })
 
 export default class ScheduleComponent extends Component {
+  componentDidMount() {
+    const programs = this.props.bookings.programs;
+    if(programs[this.props.specificProgram] === undefined) {
+      fetchAllBookings();
+    }
+  }
+
   listComponentsToRender() {
     let allBookings = []
-    const programs = {...this.props.bookings.programs};
+    const programs = this.props.bookings.programs;
     if(this.props.settings.separateSchedules){
       const bookings = programs[this.props.specificProgram]
       if(bookings) {
@@ -89,7 +96,7 @@ export default class ScheduleComponent extends Component {
         mappedBookings.push(<ListDateComponent key={uniqueId(dateString)} date={dateString} weekday={weekdayString} />);
       }
       if(booking.uid !== lastUid) {
-        mappedBookings.push(<BookingComponent booking={booking} key={uniqueId(booking.uid)}/>);
+        mappedBookings.push(<BookingComponent dispatch={this.props.dispatch} signatures={this.props.bookings.signatures} booking={booking} key={uniqueId(booking.uid)}/>);
         lastUid = booking.uid;
       }
 

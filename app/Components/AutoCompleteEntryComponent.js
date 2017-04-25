@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { fetchAllBookings } from '../actions/fetchBookings';
 import { ListItem, Left, Body, Right, Text, Icon, CheckBox } from 'native-base';
 
 export default class AutoCompleteComponent extends Component {
@@ -9,7 +8,6 @@ export default class AutoCompleteComponent extends Component {
         type: `ADD_${this.props.kindOfEntry}`,
         payload: {name: this.props.data.value, type: this.props.kindOfEntry}
       });
-      fetchAllBookings();
     } else {
       this.props.dispatch({
         type: `REMOVE_${this.props.kindOfEntry}`,

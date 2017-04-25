@@ -4,6 +4,7 @@ import ical from '../utils/ical'
 
 export default bookingsReducer = (state={
   programs: {},
+  signatures: {},
   loading: false
 }, action) => {
 
@@ -18,15 +19,31 @@ export default bookingsReducer = (state={
     let bookingsMap = ical.parseICS(action.payload);
     let bookingsList = [];
     for (key in bookingsMap) {
-      let summary = bookingsMap[key].summary.replace("Kurs.grp: ", "");
-      const course = regCourse.exec(summary)[0];
-      summary = summary.replace(course + " Sign: ", "");
-      let signatures = regSign.exec(summary)[0];
-      summary = summary.replace(signatures + " Moment: ", "");
-      signatures = signatures.split(" ");
-      const moment = regMoment.exec(summary)[0];
-      const booking = {...bookingsMap[key], course: course, signatures: signatures, moment: moment}
-      bookingsList.push(booking)
+      let summary = bookingsMap[key].summary
+      let course;
+      let signatures;
+      let moment
+      try {
+        summary = summary.replace("Kurs.grp: ", "");
+        course = regCourse.exec(summary)[0];
+        summary = summary.replace(course + " Sign: ", "");
+        if(summary.includes("Moment")) {
+          signatures = regSign.exec(summary)[0];
+          summary = summary.replace(signatures + " Moment: ", "");
+          signatures = signatures.split(" ");
+          moment = regMoment.exec(summary)[0];
+        } else {
+          signatures = regMoment.exec(summary)[0];
+          summary = summary.replace(signatures + " Program: ", "");
+          signatures = signatures.split(" ");
+          moment = "Ingen Beskrivning";
+        }
+
+        const booking = {...bookingsMap[key], course: course, signatures: signatures, moment: moment}
+        bookingsList.push(booking)
+      } catch (e) {
+        console.log(e, bookingsMap[key].summary, summary, course, signatures, moment);
+      }
     }
     state.programs = {...state.programs}
     state.programs[action.program.name] = bookingsList
@@ -40,8 +57,19 @@ export default bookingsReducer = (state={
 
   } else if (action.type === actionTypes.REMOVE_PROGRAM) {
     let programs = {...state.programs}
-    delete programs[action.payload];
+    delete programs[action.payload.name];
     state = {...state, programs: programs};
+
+  } else if (action.type === actionTypes.ADD_SIGNATURE) {
+    const signaturehtml = action.data[0].label
+    const list = signaturehtml.replace(/<(?:.|\n)*?>/gm, '').split(", ")
+    let signatures = {...state.signatures}
+    signatures[list[0]] = {name: list[1], loading: false}
+    state = {...state, signatures: signatures};
+  } else if (action.type === actionTypes.SET_SIGNATURE_LOADING) {
+    let signatures = {...state.signatures}
+    signatures[action.payload] = {loading: true}
+    state = {...state, signatures: signatures};
   }
   return state;
 }
