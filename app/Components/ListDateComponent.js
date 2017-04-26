@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet
@@ -38,5 +37,3 @@ export default class ListDateComponent extends Component {
     )
   }
 }
-
-AppRegistry.registerComponent('ListDateComponent', () => ListDateComponent);

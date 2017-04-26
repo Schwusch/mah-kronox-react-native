@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet
@@ -89,5 +88,3 @@ export default class BookingComponent extends Component {
     );
   }
 }
-
-AppRegistry.registerComponent('BookingComponent', () => BookingComponent);

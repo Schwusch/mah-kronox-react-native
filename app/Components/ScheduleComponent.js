@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
@@ -33,7 +32,7 @@ var styles = StyleSheet.create({
     color: "#ffffff"
   },
   weekHeader: {
-    backgroundColor: '#522B47',
+    backgroundColor: '#4F3381',
     padding: 5
   }
 })
@@ -128,5 +127,3 @@ export default class ScheduleComponent extends Component {
     )
   }
 }
-
-AppRegistry.registerComponent('ScheduleComponent', () => ScheduleComponent);

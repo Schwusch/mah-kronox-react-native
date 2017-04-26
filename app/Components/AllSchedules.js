@@ -25,6 +25,7 @@ import {
 } from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import platform from '../../native-base-theme/variables/platform';
+import { InteractionManager } from 'react-native';
 
 @connect((store) => {
   return {
@@ -35,22 +36,36 @@ import platform from '../../native-base-theme/variables/platform';
   }
 })
 export default class AllSchedules extends Component {
-  render() {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {renderPlaceholderOnly: true};
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({renderPlaceholderOnly: false});
+    });
+  }
+
+  produceStuffToRender() {
     let toRender;
     let title;
     const programs= this.props.programs;
     if(programs.length === 0) {
       toRender = (
-         <Footer>
-           <Button
-             transparent
-             onPress={() => {
-               Actions.Settings();
-             }}
-             >
-             <Text>Lägg till schema</Text>
-           </Button>
-         </Footer>
+        <Content>
+          <Body icon>
+            <Button
+              info
+              rounded
+              onPress={() => {
+                Actions.AddPrograms();
+              }}
+              >
+              <Text>Lägg till schema</Text>
+            </Button>
+          </Body>
+        </Content>
       );
     } else if(programs.length === 1) {
       const program = programs[0];
@@ -131,5 +146,42 @@ export default class AllSchedules extends Component {
         </Container>
       </StyleProvider>
     );
+  }
+
+  _renderPlaceholderView() {
+    return (
+      <Container>
+        <Header>
+          <Left>
+          </Left>
+          <Body>
+              <Title>Inställningar</Title>
+          </Body>
+          <Right>
+            <Button
+              transparent
+              onPress={() => { Actions.Settings() }}
+              >
+              <Icon name="settings" />
+            </Button>
+          </Right>
+        </Header>
+        <Content>
+          <Body>
+            <Text>
+              Laddar...
+            </Text>
+          </Body>
+        </Content>
+      </Container>
+    );
+  }
+
+  render() {
+    if (this.state.renderPlaceholderOnly) {
+      return this._renderPlaceholderView();
+    }
+
+    return this.produceStuffToRender();
   }
 }

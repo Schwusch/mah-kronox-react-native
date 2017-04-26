@@ -1,6 +1,6 @@
 import { compose, applyMiddleware, createStore } from 'redux';
 import {AsyncStorage} from 'react-native'
-import logger from 'redux-logger';
+//import logger from 'redux-logger';
 import reducers from '../reducers/reducers';
 import thunk from 'redux-thunk';
 import promise from "redux-promise-middleware";
@@ -15,7 +15,12 @@ const rootEpic = combineEpics(
 );
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
-const middleware = applyMiddleware(epicMiddleware, thunk, promise(), logger);
+const middleware = applyMiddleware(
+  epicMiddleware,
+  thunk,
+  promise(),
+  //logger
+);
 
 export default store = createStore(reducers, {}, compose(middleware, autoRehydrate()));
 

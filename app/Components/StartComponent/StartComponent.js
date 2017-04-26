@@ -28,11 +28,6 @@ export default class StartComponent extends Component {
   _handleAppStateChange = (nextAppState) => {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
       fetchAllBookings();
-      Toast.show({
-              text: 'Uppdaterar schema',
-              position: 'bottom',
-              duration: 2000
-            })
     }
     this.setState({appState: nextAppState});
   }

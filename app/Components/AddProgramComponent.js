@@ -4,6 +4,8 @@ import { Actions } from 'react-native-router-flux';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import * as actionTypes from '../constants/actionTypes';
 import AutoCompleteEntryComponent from './AutoCompleteEntryComponent';
+import getTheme from '../../native-base-theme/components';
+import platform from '../../native-base-theme/variables/platform';
 import {
   Container,
   Content,
@@ -17,7 +19,8 @@ import {
   Item,
   Input,
   Spinner,
-  List
+  List,
+  StyleProvider
 } from 'native-base';
 
 @connect((store) => {
@@ -69,42 +72,44 @@ export default class AddProgramComponent extends Component {
     }
 
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => {
-                this.props.dispatch({type: actionTypes.RESET_AUTOCOMPLETE})
-                Actions.pop();
-              }}
-              >
-              <Icon name="arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-              <Title>Lägg till</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content>
-          <SegmentedControls
-            options={ ["Program", "Kurs"] }
-            onSelection={ this.setSelectedOption.bind(this) }
-            selectedOption={ this.state.selectedOption }
-          />
-          <Item underline>
-              <Input
-                placeholder='Skriv här!'
-                onChangeText={ this.textChange.bind(this) }
-              />
-          </Item>
+      <StyleProvider style={getTheme(platform)}>
+        <Container>
+          <Header>
+            <Left>
+              <Button
+                transparent
+                onPress={() => {
+                  this.props.dispatch({type: actionTypes.RESET_AUTOCOMPLETE})
+                  Actions.pop();
+                }}
+                >
+                <Icon name="arrow-back" />
+              </Button>
+            </Left>
+            <Body>
+                <Title>Lägg till</Title>
+            </Body>
+            <Right />
+          </Header>
+          <Content>
+            <SegmentedControls
+              options={ ["Program", "Kurs"] }
+              onSelection={ this.setSelectedOption.bind(this) }
+              selectedOption={ this.state.selectedOption }
+            />
+            <Item underline>
+                <Input
+                  placeholder='Skriv här!'
+                  onChangeText={ this.textChange.bind(this) }
+                />
+            </Item>
 
-          <List>
-            {toBeRendered}
-          </List>
-        </Content>
-      </Container>
+            <List>
+              {toBeRendered}
+            </List>
+          </Content>
+        </Container>
+      </StyleProvider>
     );
   }
 }
