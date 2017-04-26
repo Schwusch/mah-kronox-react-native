@@ -20,8 +20,11 @@ import {
   Button,
   Title,
   Spinner,
-  Text
+  Text,
+  StyleProvider
 } from 'native-base';
+import getTheme from '../../native-base-theme/components';
+import platform from '../../native-base-theme/variables/platform';
 
 @connect((store) => {
   return {
@@ -100,31 +103,33 @@ export default class AllSchedules extends Component {
     let spinner = this.props.bookings.loading ? <Spinner color='gray'/> : null
 
     return (
-      <Container>
-        <Header hasTabs=
-          {
-            this.props.programs.length > 1 &&
-            !this.props.settings.separateSchedules
-          }>
-          <Left>
-            { spinner }
-          </Left>
-          <Body>
-              <Title>{title}</Title>
-          </Body>
-          <Right>
-            <Button
-              transparent
-              onPress={() => {
-                Actions.Settings();
-              }}
-              >
-              <Icon name="settings" />
-            </Button>
-          </Right>
-        </Header>
-        {toRender}
-      </Container>
+      <StyleProvider style={getTheme(platform)}>
+        <Container>
+          <Header hasTabs=
+            {
+              this.props.programs.length > 1 &&
+              !this.props.settings.separateSchedules
+            }>
+            <Left>
+              { spinner }
+            </Left>
+            <Body>
+                <Title>{title}</Title>
+            </Body>
+            <Right>
+              <Button
+                transparent
+                onPress={() => {
+                  Actions.Settings();
+                }}
+                >
+                <Icon name="settings" />
+              </Button>
+            </Right>
+          </Header>
+          {toRender}
+        </Container>
+      </StyleProvider>
     );
   }
 }
