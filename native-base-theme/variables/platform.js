@@ -146,10 +146,10 @@ export default {
   activeTab: (platform === 'ios') ? '#007aff' : '#fff',
   sTabBarActiveTextColor: '#007aff',
   tabBarActiveTextColor: (platform === 'ios') ? '#007aff' : '#fff',
-  tabActiveBgColor: (platform === 'ios') ? '#cde1f9' : '#3F51B5',
+  tabActiveBgColor: (platform === 'ios') ? '#cde1f9' : '#4F3381',
 
     // Tab
-  tabDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#3F51B5',
+  tabDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#4F3381',
   topTabBarTextColor: (platform === 'ios') ? '#6b6b6b' : '#b3c7f9',
   topTabBarActiveTextColor: (platform === 'ios') ? '#007aff' : '#fff',
   topTabActiveBgColor: (platform === 'ios') ? '#cde1f9' : undefined,
@@ -167,7 +167,7 @@ export default {
   searchBarHeight: (platform === 'ios') ? 30 : 40,
   toolbarInverseBg: '#222',
   toolbarTextColor: (platform === 'ios') ? '#000' : '#fff',
-  toolbarDefaultBorder: (platform === 'ios') ? '#a7a6ab' : '#4F3381',
+  toolbarDefaultBorder: (platform === 'ios') ? '#a7a6ab' : '#3F51B5',
   iosStatusbar: (platform === 'ios') ? 'dark-content' : 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hexString();
