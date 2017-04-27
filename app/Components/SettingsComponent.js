@@ -19,6 +19,7 @@ import {
   Body,
   Icon,
   Button,
+  Badge,
   Title,
   ActionSheet,
   Separator,
@@ -28,6 +29,7 @@ import {
 const BUTTONS = [
   '3 Månader',
   '6 Månader',
+  'Avbryt'
 ];
 const MONTHS = [
   3,
@@ -108,7 +110,26 @@ export default class App extends Component {
                     value={this.props.settings.separateSchedules} />
                 </Right>
             </ListItem>
-            <ListItem icon>
+            <ListItem
+              icon
+              onPress={() =>
+                ActionSheet.show(
+                  {
+                    options: BUTTONS,
+                    title: 'Månader',
+                    cancelButtonIndex: 2,
+                  },
+                  (buttonIndex) => {
+                    if(buttonIndex < 2) {
+                      this.props.dispatch({
+                        type: actionTypes.SET_SETTING_MONTHS,
+                        payload: MONTHS[buttonIndex]
+                      });
+                      fetchAllBookings();
+                    }
+                  }
+                  )}
+              >
               <Left>
                   <Icon name="md-clock" />
               </Left>
@@ -116,25 +137,9 @@ export default class App extends Component {
                 <Text>Antal månader</Text>
               </Body>
               <Right>
-                <Button
-                  bordered
-                  rounded
-                  onPress={() =>
-                    ActionSheet.show(
-                      {
-                        options: BUTTONS,
-                        title: 'Månader'
-                      },
-                      (buttonIndex) => {
-                        this.props.dispatch({
-                          type: actionTypes.SET_SETTING_MONTHS,
-                          payload: MONTHS[buttonIndex]
-                        });
-                        fetchAllBookings();
-                      }
-                      )}>
+                <Badge info>
                   <Text>{this.props.settings.months}</Text>
-                </Button>
+                </Badge>
               </Right>
             </ListItem>
             <Separator bordered>
