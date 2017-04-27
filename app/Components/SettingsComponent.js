@@ -149,36 +149,38 @@ export default class App extends Component {
 
   _renderPlaceholderView() {
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon
-                name="arrow-back"
-                onPress={() => { Actions.pop() }}
-              />
-            </Button>
-          </Left>
-          <Body>
-              <Title>Inställningar</Title>
-          </Body>
-          <Right>
-            <Button
-              transparent
-              onPress={() => { Actions.AddPrograms() }}
-              >
-              <Icon name="md-add-circle" />
-            </Button>
-          </Right>
-        </Header>
-        <Content>
-          <Body>
-            <Text>
-              Laddar...
-            </Text>
-          </Body>
-        </Content>
-      </Container>
+      <StyleProvider style={getTheme(platform)}>
+        <Container>
+          <Header>
+            <Left>
+              <Button transparent>
+                <Icon
+                  name="arrow-back"
+                  onPress={() => { Actions.pop() }}
+                />
+              </Button>
+            </Left>
+            <Body>
+                <Title>Inställningar</Title>
+            </Body>
+            <Right>
+              <Button
+                transparent
+                onPress={() => { Actions.AddPrograms() }}
+                >
+                <Icon name="md-add-circle" />
+              </Button>
+            </Right>
+          </Header>
+          <Content>
+            <Body>
+              <Text>
+                Laddar...
+              </Text>
+            </Body>
+          </Content>
+        </Container>
+      </StyleProvider>
     );
   }
 

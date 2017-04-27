@@ -25,7 +25,7 @@ import {
 } from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import platform from '../../native-base-theme/variables/platform';
-import { InteractionManager } from 'react-native';
+import { InteractionManager, View, Dimensions } from 'react-native';
 
 @connect((store) => {
   return {
@@ -52,10 +52,19 @@ export default class AllSchedules extends Component {
     let title;
     const programs= this.props.programs;
     if(programs.length === 0) {
+      const dimensions = Dimensions.get('window');
       toRender = (
         <Content>
-          <Body icon>
+          <View style={{
+            flex:1,
+            height: dimensions.height,
+            width: dimensions.width,
+            flexDirection:'row',
+            alignItems:'center',
+            justifyContent:'center'
+          }}>
             <Button
+              style={{ alignSelf: 'center' }}
               info
               rounded
               onPress={() => {
@@ -64,7 +73,7 @@ export default class AllSchedules extends Component {
               >
               <Text>Lägg till schema</Text>
             </Button>
-          </Body>
+          </View>
         </Content>
       );
     } else if(programs.length === 1) {
@@ -150,30 +159,32 @@ export default class AllSchedules extends Component {
 
   _renderPlaceholderView() {
     return (
-      <Container>
-        <Header>
-          <Left>
-          </Left>
-          <Body>
-              <Title>Inställningar</Title>
-          </Body>
-          <Right>
-            <Button
-              transparent
-              onPress={() => { Actions.Settings() }}
-              >
-              <Icon name="settings" />
-            </Button>
-          </Right>
-        </Header>
-        <Content>
-          <Body>
-            <Text>
-              Laddar...
-            </Text>
-          </Body>
-        </Content>
-      </Container>
+      <StyleProvider style={getTheme(platform)}>
+        <Container>
+          <Header>
+            <Left>
+            </Left>
+            <Body>
+                <Title>Inställningar</Title>
+            </Body>
+            <Right>
+              <Button
+                transparent
+                onPress={() => { Actions.Settings() }}
+                >
+                <Icon name="settings" />
+              </Button>
+            </Right>
+          </Header>
+          <Content>
+            <Body>
+              <Text>
+                Laddar...
+              </Text>
+            </Body>
+          </Content>
+        </Container>
+      </StyleProvider>
     );
   }
 
