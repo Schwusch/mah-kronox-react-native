@@ -93,6 +93,7 @@ export default class AddProgramComponent extends Component {
           </Header>
           <Content>
             <SegmentedControls
+              tint={"#88A825"}
               options={ ["Program", "Kurs"] }
               onSelection={ this.setSelectedOption.bind(this) }
               selectedOption={ this.state.selectedOption }

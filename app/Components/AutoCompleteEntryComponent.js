@@ -8,23 +8,13 @@ export default class AutoCompleteComponent extends Component {
         type: `ADD_${this.props.kindOfEntry}`,
         payload: {name: this.props.data.value, type: this.props.kindOfEntry}
       });
-    } else {
-      this.props.dispatch({
-        type: `REMOVE_${this.props.kindOfEntry}`,
-        payload: {name: this.props.data.value, type: this.props.kindOfEntry}
-      });
     }
   }
   render() {
-    const iconName = this.props.alreadyAdded ? "md-checkmark-circle" : "md-checkmark-circle-outline";
     return (
       <ListItem onPress={this.onPress.bind(this)}>
-        <Left>
-          <Text>{this.props.data.label}</Text>
-        </Left>
-        <Right>
-          <Icon name={iconName} />
-        </Right>
+        <CheckBox checked={this.props.alreadyAdded} />
+        <Text>{this.props.data.label}</Text>
       </ListItem>
     );
   }
