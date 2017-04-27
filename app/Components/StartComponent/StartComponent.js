@@ -3,12 +3,23 @@ import React, { Component } from 'react';
 import { AppRegistry, AppState } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { fetchAllBookings } from '../../actions/fetchBookings'
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, Actions } from 'react-native-router-flux';
 import store from '../../store/store';
 import SettingsComponent from '../SettingsComponent'
 import AddProgramComponent from '../AddProgramComponent'
 import AllSchedules from '../AllSchedules'
-import { Toast } from 'native-base'
+
+const connectedAllSchedules = connect()(AllSchedules);
+const connectedSettingsComponent = connect()(SettingsComponent);
+const connectedAddProgramComponent = connect()(AddProgramComponent);
+
+const scenes = Actions.create(
+  <Scene key="root" hideNavBar= "true">
+    <Scene key="AllSchedules" component={connectedAllSchedules} initial={true}/>
+    <Scene key="Settings" component={connectedSettingsComponent}/>
+    <Scene key="AddPrograms" component={connectedAddProgramComponent}/>
+  </Scene>
+);
 
 const RouterWithRedux = connect()(Router);
 
@@ -35,13 +46,7 @@ export default class StartComponent extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RouterWithRedux>
-            <Scene key="root" hideNavBar= "true">
-              <Scene key="AllSchedules" component={AllSchedules} initial={true}/>
-              <Scene key="Settings" component={SettingsComponent}/>
-              <Scene key="AddPrograms" component={AddProgramComponent}/>
-            </Scene>
-        </RouterWithRedux>
+        <RouterWithRedux scenes={scenes} />
       </Provider>
     );
   }
