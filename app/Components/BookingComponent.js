@@ -18,7 +18,7 @@ const style = StyleSheet.create({
   left: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingRight: 7
   },
@@ -69,13 +69,13 @@ export default class BookingComponent extends Component {
     return (
       <View style={style.box}>
         <View style={style.left}>
-          <Text style={{color: '#560027', fontWeight: 'bold',}}>
+          <Text style={{color: '#bc477b', fontWeight: 'bold', fontSize: 20,}}>
             {start.format('HH:mm')}
           </Text>
-          <Text style={{fontWeight: 'bold', color: '#bc477b'}}>
+          <Text style={{fontWeight: 'bold', color: 'darkgray', fontSize: 20,}}>
             {end.format('HH:mm')}
           </Text>
-          <Text style={{color: '#880e4f',}}>
+          <Text style={{color: '#88A825',}}>
             {booking.location}
           </Text>
         </View>

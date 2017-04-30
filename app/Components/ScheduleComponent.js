@@ -12,9 +12,12 @@ import BookingComponent from './BookingComponent';
 import ListDateComponent from './ListDateComponent';
 import * as actionTypes from '../constants/actionTypes';
 import moment from 'moment';
+const svLocale = require('moment/locale/sv');
 import Icon from 'react-native-vector-icons/FontAwesome';
 import uniqueId from 'lodash.uniqueid';
 import { Content } from 'native-base';
+
+moment.locale('sv', svLocale);
 
 var styles = StyleSheet.create({
   schedule: {
@@ -92,7 +95,7 @@ export default class ScheduleComponent extends Component {
         mappedBookings = [];
       }
       if(date.dayOfYear() != lastDate.dayOfYear()) {
-        const dateString = date.format('MMMM Do YYYY');
+        const dateString = date.format('Do MMMM YYYY');
         const weekdayString = date.format('dddd');
         mappedBookings.push(<ListDateComponent key={uniqueId(dateString)} date={dateString} weekday={weekdayString} />);
       }
