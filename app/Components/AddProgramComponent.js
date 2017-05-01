@@ -39,6 +39,11 @@ export default class AddProgramComponent extends Component {
   }
 
   setSelectedOption(selectedOption){
+    this.props.dispatch({
+      type: actionTypes.AUTOCOMPLETE_REQUEST,
+      typ: selectedOption,
+      term: this.state.text
+    });
     this.setState({
       ...this.state,
       selectedOption

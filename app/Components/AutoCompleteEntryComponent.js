@@ -8,6 +8,11 @@ export default class AutoCompleteComponent extends Component {
         type: `ADD_${this.props.kindOfEntry}`,
         payload: {name: this.props.data.value, type: this.props.kindOfEntry}
       });
+    } else {
+      this.props.dispatch({
+        type: `REMOVE_${this.props.kindOfEntry}`,
+        payload: {name: this.props.data.value, type: this.props.kindOfEntry}
+      });
     }
   }
   render() {

@@ -33,6 +33,7 @@ class StartComponent extends Component {
   }
 
   componentDidMount() {
+    codePush.notifyAppReady();
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
