@@ -11,7 +11,10 @@ const style = StyleSheet.create({
   box: {
     flex: 1,
     flexDirection: 'row',
-    margin: 5,
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 5,
+    marginBottom: 2,
     padding: 5,
     backgroundColor: '#ffffff',
   },

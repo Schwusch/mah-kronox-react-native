@@ -50,7 +50,7 @@ export default bookingsReducer = (state={
     state = {...state, loading: false};
 
   } else if (action.type === actionTypes.FETCH_BOOKINGS_ERROR) {
-    Alert.alert("Ingen internetanslutning!")
+    //Alert.alert("Ingen internetanslutning!")
 
   } else if (action.type === actionTypes.RESET_BOOKINGS) {
     state = {...state, programs: {}};
@@ -67,6 +67,6 @@ export default bookingsReducer = (state={
     signatures[list[0]] = {name: list[1], loading: false}
     state = {...state, signatures: signatures};
   }
-  
+
   return state;
 }

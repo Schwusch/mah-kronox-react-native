@@ -1,6 +1,6 @@
 import 'rxjs';
 import React, { Component } from 'react';
-import { AppRegistry, AppState } from 'react-native';
+import { AppState } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { fetchAllBookings } from '../../actions/fetchBookings'
 import { Router, Scene, Actions } from 'react-native-router-flux';
@@ -8,6 +8,10 @@ import store from '../../store/store';
 import SettingsComponent from '../SettingsComponent'
 import AddProgramComponent from '../AddProgramComponent'
 import AllSchedules from '../AllSchedules'
+import codePush from "react-native-code-push";
+import { Client } from 'bugsnag-react-native';
+
+const bugsnag = new Client();
 
 const connectedAllSchedules = connect()(AllSchedules);
 const connectedSettingsComponent = connect()(SettingsComponent);
@@ -23,7 +27,7 @@ const scenes = Actions.create(
 
 const RouterWithRedux = connect()(Router);
 
-export default class StartComponent extends Component {
+class StartComponent extends Component {
   state = {
     appState: AppState.currentState
   }
@@ -52,4 +56,5 @@ export default class StartComponent extends Component {
   }
 }
 
-AppRegistry.registerComponent('StartComponent', () => StartComponent);
+StartComponent = codePush({ checkFrequency: codePush.CheckFrequency.ON_APP_RESUME, installMode: codePush.InstallMode.ON_NEXT_RESUME })(StartComponent);
+module.exports = StartComponent

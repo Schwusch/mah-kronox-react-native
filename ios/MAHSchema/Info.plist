@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>BugsnagAPIKey</key>
+    <string>10134fca122ae79387a2000180517bcb</string>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
@@ -87,6 +89,9 @@
       <string>Times New Roman.ttf</string>
       <string>Zocial.ttf</string>
       <string>rubicon-icon-font.ttf</string>
+      <string>SimpleLineIcons.ttf</string>
     </array>
+    <key>CodePushDeploymentKey</key>
+    <string>7YV5yRvYf_OC1o1Fg-X4YQFT6ny_V1-iiJlJm</string>
   </dict>
 </plist>

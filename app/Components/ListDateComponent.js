@@ -19,6 +19,7 @@ var styles = StyleSheet.create({
     paddingRight: 10
   },
   text: {
+    fontWeight: 'bold',
     color: "#000000"
   }
 })
