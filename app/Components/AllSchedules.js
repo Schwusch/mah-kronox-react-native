@@ -165,7 +165,7 @@ export default class AllSchedules extends Component {
             <Left>
             </Left>
             <Body>
-                <Title>Inställningar</Title>
+                <Title>Scheman</Title>
             </Body>
             <Right>
               <Button

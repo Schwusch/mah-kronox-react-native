@@ -16,6 +16,7 @@ const svLocale = require('moment/locale/sv');
 import Icon from 'react-native-vector-icons/FontAwesome';
 import uniqueId from 'lodash.uniqueid';
 import { Content } from 'native-base';
+import codePush from "react-native-code-push";
 
 moment.locale('sv', svLocale);
 
@@ -41,7 +42,17 @@ var styles = StyleSheet.create({
 })
 
 export default class ScheduleComponent extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {version: ""};
+  }
+
   componentDidMount() {
+    codePush.getUpdateMetadata().then((update) => {
+      if (update) {
+        this.setState({version: update.label});
+      }
+    });
     const programs = this.props.bookings.programs;
     if(programs[this.props.specificProgram] === undefined) {
       fetchAllBookings();
@@ -118,6 +129,7 @@ export default class ScheduleComponent extends Component {
         </View>
       );
     }
+    weeks.push(<Text key={uniqueId()}>{this.state.version}</Text>)
 
     return weeks
   }
