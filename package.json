@@ -12,6 +12,7 @@
     "lodash.uniqueid": "4.0.1",
     "moment": "2.18.1",
     "native-base": "2.1.3",
+    "next-frame": "^0.2.3",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.1",
     "react-native-code-push": "2.0.2-beta",

@@ -18,7 +18,7 @@ import uniqueId from 'lodash.uniqueid';
 import { Content } from 'native-base';
 import codePush from "react-native-code-push";
 
-moment.locale('sv', svLocale);
+moment.updateLocale('sv', svLocale);
 
 var styles = StyleSheet.create({
   schedule: {
