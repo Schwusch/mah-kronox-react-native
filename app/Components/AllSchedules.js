@@ -26,6 +26,7 @@ import {
 import getTheme from '../../native-base-theme/components';
 import platform from '../../native-base-theme/variables/platform';
 import { InteractionManager, View, Dimensions } from 'react-native';
+import { fetchAllBookings } from '../actions/fetchBookings'
 
 @connect((store) => {
   return {
@@ -124,7 +125,16 @@ export default class AllSchedules extends Component {
         />
       )
     }
-    let spinner = this.props.bookings.loading ? <Spinner color='gray'/> : null
+    let spinner = this.props.bookings.loading ?
+    <Spinner color='gray'/> :
+    (<Button
+      transparent
+      onPress={() => {
+        fetchAllBookings()
+      }}
+      >
+      <Icon name="refresh" />
+    </Button>)
 
     return (
       <StyleProvider style={getTheme(platform)}>
