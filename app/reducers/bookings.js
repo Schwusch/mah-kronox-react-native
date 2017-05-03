@@ -16,7 +16,7 @@ export default bookingsReducer = (state={
     state = {...state, loading: false};
 
   } else if (action.type === actionTypes.FETCH_BOOKINGS_ERROR) {
-    //Alert.alert("Ingen internetanslutning!")
+    state = {...state, loading: false};
 
   } else if (action.type === actionTypes.RESET_BOOKINGS) {
     state = {...state, programs: {}};

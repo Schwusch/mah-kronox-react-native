@@ -8,7 +8,6 @@ import store from '../../store/store';
 import SettingsComponent from '../SettingsComponent'
 import AddProgramComponent from '../AddProgramComponent'
 import AllSchedules from '../AllSchedules'
-import codePush from "react-native-code-push";
 import { Client } from 'bugsnag-react-native';
 
 const bugsnag = new Client();

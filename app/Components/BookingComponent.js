@@ -78,9 +78,7 @@ export default class BookingComponent extends Component {
           <Text style={{fontWeight: 'bold', color: 'darkgray', fontSize: 20,}}>
             {end.format('HH:mm')}
           </Text>
-          <Text style={{color: '#88A825',}}>
-            {booking.location.split(" ")}
-          </Text>
+          {booking.location.split(" ").map(loc => <Text key={loc} style={{color: '#88A825',}}>{loc}</Text>)}
         </View>
         <View style={style.right}>
           <Text>{booking.course}</Text>
