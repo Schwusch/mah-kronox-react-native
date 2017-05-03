@@ -41,16 +41,16 @@ function handleBooking(booking) {
     let course = "";
     let signatures = [];
     let moment = ""
-    let regParts = /.*?\:\s.*?(?=[a-zA-Z\.]+\:)|.*/g;
+    let regParts = /.*?\:\s.*?(?=Sign|Moment|Program)|.*/g;
     let parts = [];
     let match;
 
     do {
       match = regParts.exec(summary)
-      if (match[0] !== "") {
+      if (match && match[0] !== "") {
         parts.push(match[0])
       }
-    } while (match[0] !== "");
+    } while (match && match[0] !== "");
 
     for(part of parts) {
       if (part.includes("Kurs.grp: ")) {

@@ -79,7 +79,7 @@ export default class BookingComponent extends Component {
             {end.format('HH:mm')}
           </Text>
           <Text style={{color: '#88A825',}}>
-            {booking.location}
+            {booking.location.split(" ")}
           </Text>
         </View>
         <View style={style.right}>

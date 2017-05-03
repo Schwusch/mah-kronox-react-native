@@ -27,13 +27,12 @@ const scenes = Actions.create(
 
 const RouterWithRedux = connect()(Router);
 
-class StartComponent extends Component {
+export default class StartComponent extends Component {
   state = {
     appState: AppState.currentState
   }
 
   componentDidMount() {
-    codePush.notifyAppReady();
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
@@ -56,6 +55,3 @@ class StartComponent extends Component {
     );
   }
 }
-
-StartComponent = codePush({ checkFrequency: codePush.CheckFrequency.ON_APP_RESUME, installMode: codePush.InstallMode.ON_NEXT_RESUME })(StartComponent);
-module.exports = StartComponent
