@@ -21,20 +21,10 @@ import {
   Button,
   Badge,
   Title,
-  ActionSheet,
   Separator,
   StyleProvider
 } from 'native-base';
 
-const BUTTONS = [
-  '3 Månader',
-  '6 Månader',
-  'Avbryt'
-];
-const MONTHS = [
-  3,
-  6
-]
 @connect((store) => {
   return {
     bookings: store.bookings,
@@ -110,40 +100,6 @@ export default class App extends Component {
                     value={this.props.settings.separateSchedules} />
                 </Right>
             </ListItem>
-            {/*
-              <ListItem
-                icon
-                onPress={() =>
-                  ActionSheet.show(
-                    {
-                      options: BUTTONS,
-                      title: 'Månader',
-                      cancelButtonIndex: 2,
-                    },
-                    (buttonIndex) => {
-                      if(buttonIndex < 2) {
-                        this.props.dispatch({
-                          type: actionTypes.SET_SETTING_MONTHS,
-                          payload: MONTHS[buttonIndex]
-                        });
-                        fetchAllBookings();
-                      }
-                    }
-                    )}
-                >
-                <Left>
-                    <Icon name="md-clock" />
-                </Left>
-                <Body>
-                  <Text>Antal månader</Text>
-                </Body>
-                <Right>
-                  <Badge info>
-                    <Text>{this.props.settings.months}</Text>
-                  </Badge>
-                </Right>
-              </ListItem>
-              */}
             <Separator bordered>
                 <Text>Scheman</Text>
             </Separator>

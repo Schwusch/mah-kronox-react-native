@@ -41,7 +41,7 @@ function handleBooking(booking) {
     let course = "";
     let signatures = [];
     let moment = ""
-    let regParts = /.*?\:\s.*?(?=Sign|Moment|Program)|.*/g;
+    let regParts = /.*?\:\s.*?(?=Sign:|Moment:|Program:)|.*/g;
     let parts = [];
     let match;
 

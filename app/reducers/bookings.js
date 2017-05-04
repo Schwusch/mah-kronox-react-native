@@ -27,11 +27,15 @@ export default bookingsReducer = (state={
     state = {...state, programs: programs};
 
   } else if (action.type === actionTypes.ADD_SIGNATURE) {
-    const signaturehtml = action.data[0].label
-    const list = signaturehtml.replace(/<(?:.|\n)*?>/gm, '').split(", ")
-    let signatures = {...state.signatures}
-    signatures[list[0]] = {name: list[1], loading: false}
-    state = {...state, signatures: signatures};
+    try {
+      const signaturehtml = action.data[0].label
+      const list = signaturehtml.replace(/<(?:.|\n)*?>/gm, '').split(", ")
+      let signatures = {...state.signatures}
+      signatures[list[0]] = {name: list[1], loading: false}
+      state = {...state, signatures: signatures};
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   return state;
